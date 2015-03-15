@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <ImageView
+        android:id="@+id/user_head_portiait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:minHeight="100dip"
+        android:minWidth="100dip"
+        android:maxWidth="100dip"
+        android:maxHeight="100dip"
+        android:scaleType="fitCenter"
+         />
+    <Button
+        android:id ="@+id/upload_head_portiait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上传头像"
+        />
+    
+        <Button
+        android:id ="@+id/finish_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="完成"
+        />
+
+</LinearLayout>

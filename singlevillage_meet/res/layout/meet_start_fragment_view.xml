@@ -4,6 +4,6 @@
     android:id="@+id/article"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="meet_unstart_fragment"
+    android:text="meet_start_fragment"
     android:padding="16dp"
     android:textSize="18sp" />

@@ -12,7 +12,7 @@ public class MeetActivity extends MyActivity {
 	private TextView  mPersonalMsgTextView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
-	{
+	{//TODO 从上一个activity中取得当前的状态来加载meet具体fragment
 		setContentView(R.layout.meet_layout);
 		mMsgTextView = (TextView)findViewById(R.id.msg);
 		mPersonalMsgTextView = (TextView)findViewById(R.id.personal_msg);
@@ -28,6 +28,11 @@ public class MeetActivity extends MyActivity {
                 .add(R.id.meet_view, firstFragment).commit();
 		
 		super.onCreate(savedInstanceState);
+	}
+	
+	private void updateFragment()
+	{//TODO 通过getMessage获取后台状态来更新fragment
+		
 	}
 	@Override
 	public void getMessage(TranObject msg) {

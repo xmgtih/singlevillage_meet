@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/meet_layout"
+    android:orientation="vertical" >
+
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:orientation="horizontal"
+        android:layout_weight="1" >
+
+        <TextView 
+            android:id="@+id/msg"
+            android:text="消息"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:textSize="20.0sp"
+             />
+
+        <TextView
+            android:id="@+id/personal_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="20.0sp"
+            android:text="个人信息" 
+            />
+
+    </RelativeLayout>
+    
+    <FrameLayout 
+        android:id="@+id/meet_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="3"
+        >
+        
+        
+    </FrameLayout>
+
+</LinearLayout>

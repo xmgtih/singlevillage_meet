@@ -69,6 +69,11 @@
             android:name="com.singlevillage.meet.activity.MeetActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateVisible" >
+        </activity>
+        <activity
+            android:name="com.singlevillage.meet.activity.MeetMsgActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

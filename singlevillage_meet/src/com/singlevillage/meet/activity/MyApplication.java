@@ -25,6 +25,15 @@ public class MyApplication extends Application {
 		System.out.println(util.getIp() + " " + util.getPort());
 		client = new Client(util.getIp(), util.getPort());// 从配置文件中读ip和地址
 		mRecentList = new LinkedList<RecentChatEntity>();
+		RecentChatEntity  recentChatEntity1 = new RecentChatEntity();
+		recentChatEntity1.setId(1);
+		recentChatEntity1.setCount(1);
+		recentChatEntity1.setImg(1);
+		recentChatEntity1.setMsg("hehe");
+		recentChatEntity1.setName("sdfadf");
+		recentChatEntity1.setTime("sdfadfasdfsdf");
+		
+		mRecentList.add(recentChatEntity1);
 		mRecentAdapter = new RecentChatAdapter(getApplicationContext(),
 				mRecentList);
 		super.onCreate();

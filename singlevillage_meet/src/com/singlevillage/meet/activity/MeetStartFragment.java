@@ -14,7 +14,7 @@ public class MeetStartFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		return inflater.inflate(R.layout.meet_unstart_fragment_view, container, false);
+		return inflater.inflate(R.layout.meet_start_fragment_view, container, false);
 	}
  
 }

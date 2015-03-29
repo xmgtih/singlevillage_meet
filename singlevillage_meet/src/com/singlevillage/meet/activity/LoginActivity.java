@@ -32,7 +32,6 @@ import com.singlevillage.meet.util.DialogFactory;
 import com.singlevillage.meet.util.Encode;
 import com.singlevillage.meet.util.SharePreferenceUtil;
 import com.singlevillage.meet.util.UserDB;
-import com.way.chat.activity.R;
 
 /**
  * 登录

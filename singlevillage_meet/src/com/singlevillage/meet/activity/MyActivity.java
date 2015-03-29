@@ -1,11 +1,11 @@
 package com.singlevillage.meet.activity;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.singlevillage.meet.common.tran.bean.TranObject;
 import com.singlevillage.meet.common.util.Constants;
@@ -16,7 +16,7 @@ import com.singlevillage.meet.common.util.Constants;
  * @author way
  * 
  */
-public abstract class MyActivity extends Activity {
+public abstract class MyActivity extends FragmentActivity {
 	/**
 	 * 广播接收者，接收GetMsgService发送过来的消息
 	 */

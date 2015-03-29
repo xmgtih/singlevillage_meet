@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.singlevillage.meet.common.bean.User;
 import com.singlevillage.meet.util.GroupFriend;
 import com.singlevillage.meet.util.MyDate;
-import com.way.chat.activity.R;
 
 /**
  * 自定义ExpandableListView的适配器

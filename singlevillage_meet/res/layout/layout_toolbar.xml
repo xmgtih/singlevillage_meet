@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_radio"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="bottom"
+    android:gravity="center"
+    android:orientation="horizontal" >
+
+    <RadioButton
+        android:id="@+id/radio_recommend"
+        style="@style/main_tab_bottom_style"
+        android:layout_height="match_parent"
+        android:background="@drawable/selector_tab_right"
+        android:drawableTop="@drawable/selector_tab_home"
+        android:paddingTop="15dip"
+        android:tag="radio_recommend" />
+
+    <RadioButton
+        android:id="@+id/radio_hot"
+        style="@style/main_tab_bottom_modify"
+        android:layout_height="match_parent"
+        android:background="@drawable/selector_tab_right"
+        android:drawableTop="@drawable/selector_tab_home"
+        android:paddingTop="15dip"
+        android:tag="radio_hot" />
+
+   <RadioButton
+        android:id="@+id/radio_discovery"
+        style="@style/main_tab_bottom_modify"
+        android:layout_height="match_parent"
+        android:background="@drawable/selector_tab_right"
+        android:drawableTop="@drawable/selector_tab_home"
+        android:paddingTop="15dip"
+        android:tag="radio_search" />
+
+</RadioGroup>

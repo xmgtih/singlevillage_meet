@@ -1,5 +1,7 @@
 package com.singlevillage.meet.util;
 
+import com.singlevillage.meet.activity.R;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -7,7 +9,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.way.chat.activity.R;
 
 public class DialogFactory {
 

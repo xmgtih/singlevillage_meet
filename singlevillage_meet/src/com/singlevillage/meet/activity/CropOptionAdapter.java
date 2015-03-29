@@ -2,7 +2,6 @@ package com.singlevillage.meet.activity;
 
 import java.util.ArrayList;
 
-import com.way.chat.activity.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;

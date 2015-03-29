@@ -17,7 +17,6 @@ import android.view.WindowManager;
 
 import com.singlevillage.meet.common.util.Constants;
 import com.singlevillage.meet.util.SharePreferenceUtil;
-import com.way.chat.activity.R;
 
 /**
  * 欢迎界面

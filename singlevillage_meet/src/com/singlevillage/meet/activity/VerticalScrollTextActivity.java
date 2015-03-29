@@ -3,7 +3,6 @@ package com.singlevillage.meet.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.way.chat.activity.R;
 
 import android.app.Activity;
 import android.os.Bundle;

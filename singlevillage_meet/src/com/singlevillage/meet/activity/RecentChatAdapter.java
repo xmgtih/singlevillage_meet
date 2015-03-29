@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.singlevillage.meet.common.bean.User;
-import com.way.chat.activity.R;
 
 public class RecentChatAdapter extends BaseAdapter {
 	private Context context;

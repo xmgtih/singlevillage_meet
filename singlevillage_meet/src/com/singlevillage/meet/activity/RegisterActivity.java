@@ -21,7 +21,6 @@ import com.singlevillage.meet.common.tran.bean.TranObject;
 import com.singlevillage.meet.common.tran.bean.TranObjectType;
 import com.singlevillage.meet.util.DialogFactory;
 import com.singlevillage.meet.util.Encode;
-import com.way.chat.activity.R;
 
 public class RegisterActivity extends MyActivity implements OnClickListener {
 

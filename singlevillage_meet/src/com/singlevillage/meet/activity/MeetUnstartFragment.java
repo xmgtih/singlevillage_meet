@@ -1,6 +1,5 @@
 package com.singlevillage.meet.activity;
 
-import com.way.chat.activity.R;
 
 import android.app.Fragment;
 import android.os.Bundle;

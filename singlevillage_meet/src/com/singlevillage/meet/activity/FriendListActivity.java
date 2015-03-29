@@ -45,7 +45,6 @@ import com.singlevillage.meet.util.MessageDB;
 import com.singlevillage.meet.util.MyDate;
 import com.singlevillage.meet.util.SharePreferenceUtil;
 import com.singlevillage.meet.util.UserDB;
-import com.way.chat.activity.R;
 
 /**
  * 好友列表的Activity

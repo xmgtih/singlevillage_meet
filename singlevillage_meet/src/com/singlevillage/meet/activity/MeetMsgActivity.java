@@ -5,7 +5,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.singlevillage.meet.common.tran.bean.TranObject;
-import com.way.chat.activity.R;
 
 public class MeetMsgActivity extends MyActivity {
 	

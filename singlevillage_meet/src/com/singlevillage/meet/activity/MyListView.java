@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.singlevillage.meet.util.MyDate;
-import com.way.chat.activity.R;
 
 import android.content.Context;
 import android.util.AttributeSet;

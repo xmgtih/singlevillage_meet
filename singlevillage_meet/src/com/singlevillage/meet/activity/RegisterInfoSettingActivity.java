@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.singlevillage.meet.common.tran.bean.TranObject;
-import com.way.chat.activity.R;
 
 public class RegisterInfoSettingActivity extends MyActivity {
 	

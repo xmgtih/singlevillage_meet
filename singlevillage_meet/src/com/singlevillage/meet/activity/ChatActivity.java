@@ -14,7 +14,6 @@ import com.singlevillage.meet.common.util.Constants;
 import com.singlevillage.meet.util.MessageDB;
 import com.singlevillage.meet.util.MyDate;
 import com.singlevillage.meet.util.SharePreferenceUtil;
-import com.way.chat.activity.R;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;

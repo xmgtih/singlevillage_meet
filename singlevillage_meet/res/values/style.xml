@@ -39,5 +39,31 @@
         <item name="android:textSize">15sp</item>
         <item name="android:gravity">center</item>
     </style>
+    
+    <style name="main_tab_bottom_style">
+        <item name="android:button">@null</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_marginTop">0dip</item>
+        <item name="android:layout_marginRight">0dip</item>
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:layout_marginLeft">0dip</item>
+        <item name="android:layout_marginBottom">0dip</item>
+        <item name="android:drawablePadding">0dip</item>
 
+    </style>
+    <style name="main_tab_bottom_modify">
+        <item name="android:button">@null</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_marginTop">0dip</item>
+        <item name="android:layout_marginRight">0dip</item>
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:layout_marginLeft">0dip</item>
+        <item name="android:layout_marginBottom">0dip</item>
+        <item name="android:drawablePadding">0dip</item>
+
+    </style>
+
+    
 </resources>

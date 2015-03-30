@@ -92,8 +92,11 @@ public class MeetActivity2 extends MyActivity implements OnClickListener{
 		mViewPager = (ViewPager)findViewById(R.id.meet_viewpager);
 		MeetTab  meetTab = new MeetTab();
 		PersonalMsgTab  personalMsgTab = new PersonalMsgTab();
+		MeTab  meTab = new MeTab();
+
 		mFragments.add(meetTab);
 		mFragments.add(personalMsgTab);
+		mFragments.add(meTab);
 		/**
 		 * 初始化Adapter
 		 */
@@ -119,17 +122,14 @@ public class MeetActivity2 extends MyActivity implements OnClickListener{
 		ChangeColorIconWithTextView one = (ChangeColorIconWithTextView) findViewById(R.id.id_indicator_one);
 		ChangeColorIconWithTextView two = (ChangeColorIconWithTextView) findViewById(R.id.id_indicator_two);
 		ChangeColorIconWithTextView three = (ChangeColorIconWithTextView) findViewById(R.id.id_indicator_three);
-		ChangeColorIconWithTextView four = (ChangeColorIconWithTextView) findViewById(R.id.id_indicator_four);
 
 		mTabIndicator.add(one);
 		mTabIndicator.add(two);
 		mTabIndicator.add(three);
-		mTabIndicator.add(four);
 
 		one.setOnClickListener(this);
 		two.setOnClickListener(this);
 		three.setOnClickListener(this);
-		four.setOnClickListener(this);
 
 		one.setIconAlpha(1.0f);
 	}
@@ -150,6 +150,10 @@ public class MeetActivity2 extends MyActivity implements OnClickListener{
 	        case R.id.id_indicator_two:  
 	            mTabIndicator.get(1).setIconAlpha(1.0f);  
 	            mViewPager.setCurrentItem(1);  
+	            break;  
+	        case R.id.id_indicator_three:  
+	            mTabIndicator.get(1).setIconAlpha(1.0f);  
+	            mViewPager.setCurrentItem(2);  
 	            break;  
 	  
 	        }  

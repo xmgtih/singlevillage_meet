@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">QQ</string>
+    <string name="app_name">单身村</string>
+    <string name="mdn">手机号</string>
+    <string name="register_text" >注册</string>
+    <string name="forget_passwd">忘记密码？</string>
     <string name="app_display_name">手机QQ2012</string>
     <string name="group_online">在线好友</string>
     <string name="group_stranger">陌生人</string>

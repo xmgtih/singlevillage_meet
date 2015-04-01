@@ -85,7 +85,7 @@
         android:layout_below="@id/input2"       
         android:layout_marginLeft="35.0dip"
         android:layout_marginRight="35.0dip"
-        android:layout_marginTop="20.0dip"
+        android:layout_marginTop="70.0dip"
         android:background="@color/green_03"
         android:gravity="center"
         android:paddingTop="5.0dip"

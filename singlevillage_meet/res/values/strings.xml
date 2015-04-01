@@ -5,7 +5,12 @@
     <string name="phone_verify">手机号验证</string>
     <string name="receive_verify_num">收取验证码</string>
     <string name="register_text" >注册</string>
+    <string name="singlevillage_num">单身村微信号</string>
+    <string name="register_notice">为维护单身村的安全，暂不开放注册，只能推荐加入，你可以加入单身村微信号获取推荐</string>
     <string name="forget_passwd">忘记密码？</string>
+    <string name="next_step">下一步</string>
+    <string name="input_verify">输入验证码</string>
+    <string name="again_receive_verify">重新获取验证码</string>
     <string name="register_finish">完成</string>
     <string name="register_name">姓名</string>
     <string name="gender">性别</string>

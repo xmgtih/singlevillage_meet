@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/register_mdn_singlevillage"   
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#F0FFF0"
+    android:orientation="vertical">
+    
+	<TextView
+	    android:id="@+id/title"
+	    android:layout_width="match_parent"
+        android:layout_height="48dp"        
+        android:background="@color/green_03"      
+        android:text="@string/register_text"
+        android:textColor="@color/white"       
+        android:gravity="center"
+        android:textSize="24.0sp" 
+	    />
+	<TextView
+	    android:id="@+id/input_verify"
+	    android:layout_width="match_parent"
+        android:layout_height="48dp"        
+        android:layout_below="@id/title"  
+        android:layout_marginTop="48dp"
+        android:text="@string/input_verify"
+        android:textColor="@color/green_03"       
+        android:gravity="center"
+        android:textSize="20.0sp" 
+	    />
+	        
+  
+       <EditText
+          android:id="@+id/input_mdn"           
+          android:layout_width="fill_parent"
+          android:layout_height="26.0dip"   
+          android:layout_below="@id/input_verify"   
+          android:background="@color/white"        
+          android:inputType="number"
+          android:maxLength="11"
+          android:maxLines="1"
+          android:layout_marginLeft="48dp"
+          android:layout_marginRight="48dp"     
+          android:layout_marginTop="28dp"     
+          android:paddingLeft="12.0dip"
+          android:textColor="#ff000000"
+          android:textSize="14.0sp" />
+   	 <Button
+        android:id="@+id/again_receive_verify"
+        android:layout_width="fill_parent"
+        android:layout_height="28dp"      
+        android:layout_below="@id/input_mdn"       
+        android:layout_marginLeft="60.0dip"
+        android:layout_marginRight="60.0dip"
+        android:layout_marginTop="40.0dip"
+        android:background="@color/green_03"
+        android:gravity="center"
+        android:paddingTop="5.0dip"
+        android:text="@string/again_receive_verify"
+        android:textColor="@color/white"
+        android:textSize="15.0sp" />
+   	
+	<LinearLayout
+   	 	android:id="@+id/verify_layout"
+	    android:layout_width="match_parent"
+        android:layout_height="58dp"        
+        android:background="@color/green_02"      
+       	android:layout_alignParentBottom="true"     	
+      	
+         android:orientation="vertical">
+       <Button
+        android:id="@+id/verify_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="38dp"             
+        android:layout_marginLeft="35.0dip"
+        android:layout_marginRight="35.0dip"
+        android:layout_marginTop="10.0dip"
+        android:background="@color/green_03"
+        android:gravity="center"
+        android:paddingTop="5.0dip"
+        android:text="@string/next_step"
+        android:textColor="@color/white"
+        android:textSize="18.0sp" />
+       
+    </LinearLayout>
+    
+
+
+</RelativeLayout>

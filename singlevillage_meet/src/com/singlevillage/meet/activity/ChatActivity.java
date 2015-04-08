@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.singlevillage.meet.adapter.ChatMsgViewAdapter;
 import com.singlevillage.meet.client.Client;
 import com.singlevillage.meet.client.ClientOutputThread;
 import com.singlevillage.meet.common.bean.TextMessage;

@@ -32,6 +32,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.singlevillage.meet.adapter.MyExAdapter;
+import com.singlevillage.meet.adapter.MyPagerAdapter;
 import com.singlevillage.meet.client.ClientInputThread;
 import com.singlevillage.meet.client.ClientOutputThread;
 import com.singlevillage.meet.client.MessageListener;

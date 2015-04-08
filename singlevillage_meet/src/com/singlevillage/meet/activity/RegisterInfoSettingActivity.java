@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.singlevillage.meet.adapter.CropOptionAdapter;
 import com.singlevillage.meet.common.tran.bean.TranObject;
 
 public class RegisterInfoSettingActivity extends MyActivity {

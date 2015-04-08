@@ -2,6 +2,7 @@ package com.singlevillage.meet.activity;
 
 import java.util.LinkedList;
 
+import com.singlevillage.meet.adapter.RecentChatAdapter;
 import com.singlevillage.meet.client.Client;
 import com.singlevillage.meet.common.util.Constants;
 import com.singlevillage.meet.util.SharePreferenceUtil;

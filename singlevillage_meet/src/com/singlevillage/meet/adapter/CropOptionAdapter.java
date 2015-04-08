@@ -1,7 +1,11 @@
-package com.singlevillage.meet.activity;
+package com.singlevillage.meet.adapter;
 
 import java.util.ArrayList;
 
+import com.singlevillage.meet.activity.CropOption;
+import com.singlevillage.meet.activity.R;
+import com.singlevillage.meet.activity.R.id;
+import com.singlevillage.meet.activity.R.layout;
 
 import android.content.Context;
 import android.view.LayoutInflater;

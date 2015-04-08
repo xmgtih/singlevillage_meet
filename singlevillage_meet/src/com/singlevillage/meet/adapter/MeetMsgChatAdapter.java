@@ -1,7 +1,13 @@
-package com.singlevillage.meet.activity;
+package com.singlevillage.meet.adapter;
 
 import java.util.LinkedList;
 
+
+
+import com.singlevillage.meet.activity.MyApplication;
+import com.singlevillage.meet.activity.R;
+import com.singlevillage.meet.activity.RecentChatEntity;
+import com.singlevillage.meet.activity.R.drawable;
 
 import android.content.Context;
 import android.view.LayoutInflater;

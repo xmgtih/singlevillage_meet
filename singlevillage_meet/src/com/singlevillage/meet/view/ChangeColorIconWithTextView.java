@@ -1,5 +1,7 @@
-package com.singlevillage.meet.activity;
+package com.singlevillage.meet.view;
 
+
+import com.singlevillage.meet.activity.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.way.chat.activity"
+    package="com.singlevillage.meet.activity"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="13"
         android:targetSdkVersion="15" />
     <!-- 手机振动的权限 -->
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -52,11 +52,7 @@
         <activity
             android:name="com.singlevillage.meet.activity.ChatActivity"
             android:windowSoftInputMode="adjustResize" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.singlevillage.meet.activity.RegisterInfoSettingActivity"
@@ -64,7 +60,31 @@
             android:windowSoftInputMode="stateVisible" >
 
         </activity>
-        
+        <activity
+            android:name="com.singlevillage.meet.activity.VerticalScrollTextActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
+        <activity
+            android:name="com.singlevillage.meet.activity.MeetActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
+        <activity
+            android:name="com.singlevillage.meet.activity.MeetMsgActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
+        <activity
+            android:name="com.singlevillage.meet.activity.MeetActivity2"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateVisible" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

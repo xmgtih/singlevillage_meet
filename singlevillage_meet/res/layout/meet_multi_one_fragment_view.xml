@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#7FFF00"
+    android:gravity="top|center_vertical"
+    android:orientation="vertical" >
+    
+  <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#008B00"
+        android:orientation="vertical" >
+    <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/qr_register"
+            android:textColor="@color/white"
+            android:textSize="30.0sp" />
+    </RelativeLayout>
+    
+	<include layout="@layout/meet_one_multi_head_photo_item"/>
+    <!-- <com.singlevillage.meet.view.RoundImageView
+        android:id="@+id/id_qiqiu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:src="@drawable/qiqiu" >
+    </com.singlevillage.meet.view.RoundImageView>
+ -->
+    <TextView
+        android:id="@+id/chat_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dip"
+        android:text="10S后大家将认识：王雪"
+        android:textColor="#000000"
+        android:textSize="20.0sp" />
+
+    <TextView
+        android:id="@+id/chat_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dip"
+        android:background="#008B00"
+        android:text="她和你是老乡哦"
+        android:textColor="#ffffff"
+        android:textSize="20.0sp" />
+
+    <TextView
+        android:id="@+id/chat_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dip"
+        android:text="她感兴趣的话题是"
+        android:textColor="#000000"
+        android:textSize="20.0sp" />
+	<TextView
+        android:id="@+id/interest_topic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dip"
+        android:text="你是哪里人啊？\n你是哪里人啊？\n有什么爱好？"
+        android:textColor="#000000"
+        android:textSize="20.0sp" />
+
+</LinearLayout>

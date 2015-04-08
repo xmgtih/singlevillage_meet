@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#7FFF00"
+    android:gravity="top|center_vertical"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dip"
+        android:layout_marginBottom="30dip"
+        android:text="您将进入一号房间"
+        android:textColor="@color/white"
+        android:textSize="20.0sp" />
+
+        <LinearLayout
+        	android:id="@+id/head_photos"    
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="top|center_vertical"
+            android:orientation="vertical" >
+            
+        </LinearLayout>
+
+</LinearLayout>

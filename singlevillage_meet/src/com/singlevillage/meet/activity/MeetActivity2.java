@@ -90,12 +90,12 @@ public class MeetActivity2 extends MyActivity implements OnClickListener{
 	private void initView()
 	{
 		mViewPager = (ViewPager)findViewById(R.id.meet_viewpager);
-		MeetTab  meetTab = new MeetTab();
+		MeetOne2MultiFragment  meetTab = new MeetOne2MultiFragment();
 		PersonalMsgTab  personalMsgTab = new PersonalMsgTab();
 		MeTab  meTab = new MeTab();
-
-		mFragments.add(meetTab);
+		
 		mFragments.add(personalMsgTab);
+		mFragments.add(meetTab);
 		mFragments.add(meTab);
 		/**
 		 * 初始化Adapter

@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.singlevillage.meet.client.Client;
@@ -40,24 +41,24 @@ import com.singlevillage.meet.util.UserDB;
  * 
  */
 public class LoginActivity extends MyActivity implements OnClickListener {
-	private Button mBtnRegister;
+	private TextView mBtnRegister;
 	private Button mBtnLogin;
 	private EditText mAccounts, mPassword;
 	private CheckBox mAutoSavePassword;
 	private MyApplication application;
-
-	private View mMoreView;// “更多登录选项”的view
+	private MenuInflater mi;// 菜单
+/*	private View mMoreView;// “更多登录选项”的view
 	private ImageView mMoreImage;// “更多登录选项”的箭头图片
 	private View mMoreMenuView;// “更多登录选项”中的内容view
-	private MenuInflater mi;// 菜单
+	
 	private boolean mShowMenu = false;// “更多登录选项”的内容是否显示
-
+*/
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.loginpage);
 		application = (MyApplication) this.getApplicationContext();
 		initView();
-		mi = new MenuInflater(this);
+	//	mi = new MenuInflater(this);
 	}
 
 	@Override
@@ -72,26 +73,27 @@ public class LoginActivity extends MyActivity implements OnClickListener {
 	}
 
 	public void initView() {
-		mAutoSavePassword = (CheckBox) findViewById(R.id.auto_save_password);
-		mMoreView = findViewById(R.id.more);
-		mMoreMenuView = findViewById(R.id.moremenu);
-		mMoreImage = (ImageView) findViewById(R.id.more_image);
-		mMoreView.setOnClickListener(this);
+	//	mAutoSavePassword = (CheckBox) findViewById(R.id.auto_save_password);
+		//mMoreView = findViewById(R.id.more);
+	//	mMoreMenuView = findViewById(R.id.moremenu);
+	//	mMoreImage = (ImageView) findViewById(R.id.more_image);
+	//	mMoreView.setOnClickListener(this);
 
-		mBtnRegister = (Button) findViewById(R.id.regist_btn);
+		mBtnRegister = (TextView) findViewById(R.id.regist_text);
 		mBtnRegister.setOnClickListener(this);
 
 		mBtnLogin = (Button) findViewById(R.id.login_btn);
 		mBtnLogin.setOnClickListener(this);
 
-		mAccounts = (EditText) findViewById(R.id.lgoin_accounts);
-		mPassword = (EditText) findViewById(R.id.login_password);
+		mAccounts = (EditText) findViewById(R.id.input_mdn);
+		mPassword = (EditText) findViewById(R.id.input_passwd);
+	/*自动保存密码功能
 		if (mAutoSavePassword.isChecked()) {
 			SharePreferenceUtil util = new SharePreferenceUtil(
 					LoginActivity.this, Constants.SAVE_USER);
 			mAccounts.setText(util.getId());
 			mPassword.setText(util.getPasswd());
-		}
+		}*/
 	}
 
 	/**
@@ -100,7 +102,7 @@ public class LoginActivity extends MyActivity implements OnClickListener {
 	 * @param bShow
 	 *            是否显示
 	 */
-	public void showMoreView(boolean bShow) {
+	/*public void showMoreView(boolean bShow) {
 		if (bShow) {
 			mMoreMenuView.setVisibility(View.GONE);
 			mMoreImage.setImageResource(R.drawable.login_more_up);
@@ -110,7 +112,7 @@ public class LoginActivity extends MyActivity implements OnClickListener {
 			mMoreImage.setImageResource(R.drawable.login_more);
 			mShowMenu = false;
 		}
-	}
+	}*/
 
 	/**
 	 * 处理点击事件
@@ -118,10 +120,10 @@ public class LoginActivity extends MyActivity implements OnClickListener {
 	public void onClick(View v) {
 
 		switch (v.getId()) {
-		case R.id.more:
+	/*	case R.id.more:
 			showMoreView(!mShowMenu);
-			break;
-		case R.id.regist_btn:
+			break;*/
+		case R.id.regist_text:
 			goRegisterActivity();
 			break;
 		case R.id.login_btn:
@@ -162,7 +164,7 @@ public class LoginActivity extends MyActivity implements OnClickListener {
 		String accounts = mAccounts.getText().toString();
 		String password = mPassword.getText().toString();
 		if (accounts.length() == 0 || password.length() == 0) {
-			DialogFactory.ToastDialog(this, "QQ登录", "亲！帐号或密码不能为空哦");
+			DialogFactory.ToastDialog(this, "单身村登录", "亲！帐号或密码不能为空哦");
 		} else {
 			showRequestDialog();
 			// 通过Socket验证信息
@@ -178,7 +180,7 @@ public class LoginActivity extends MyActivity implements OnClickListener {
 			} else {
 				if (mDialog.isShowing())
 					mDialog.dismiss();
-				DialogFactory.ToastDialog(LoginActivity.this, "QQ登录",
+				DialogFactory.ToastDialog(LoginActivity.this, "单身村登录",
 						"亲！服务器暂未开放哦");
 			}
 		}
@@ -215,7 +217,7 @@ public class LoginActivity extends MyActivity implements OnClickListener {
 					finish();
 					Toast.makeText(getApplicationContext(), "登录成功", 0).show();
 				} else {
-					DialogFactory.ToastDialog(LoginActivity.this, "QQ登录",
+					DialogFactory.ToastDialog(LoginActivity.this, "单身村登录",
 							"亲！您的帐号或密码错误哦");
 					if (mDialog.isShowing())
 						mDialog.dismiss();
@@ -242,7 +244,7 @@ public class LoginActivity extends MyActivity implements OnClickListener {
 			setDialog();
 			break;
 		case R.id.login_menu_exit:
-			exitDialog(LoginActivity.this, "QQ提示", "亲！您真的要退出吗？");
+			exitDialog(LoginActivity.this, "单身村提示", "亲！您真的要退出吗？");
 			break;
 		default:
 			break;
@@ -252,7 +254,7 @@ public class LoginActivity extends MyActivity implements OnClickListener {
 
 	@Override
 	public void onBackPressed() {// 捕获返回按键
-		exitDialog(LoginActivity.this, "QQ提示", "亲！您真的要退出吗？");
+		exitDialog(LoginActivity.this, "单身村提示", "亲！您真的要退出吗？");
 	}
 
 	/**

@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">QQ</string>
+    <string name="app_name">单身村</string>
+    <string name="mdn">手机号</string>
+    <string name="phone_verify">手机号验证</string>
+    <string name="receive_verify_num">收取验证码</string>
+    <string name="register_text" >注册</string>
+    <string name="singlevillage_num">单身村微信号</string>
+    <string name="register_notice">为维护单身村的安全，暂不开放注册，只能推荐加入，你可以加入单身村微信号获取推荐</string>
+    <string name="forget_passwd">忘记密码？</string>
+    <string name="next_step">下一步</string>
+    <string name="input_verify">输入验证码</string>
+    <string name="again_receive_verify">重新获取验证码</string>
+    <string name="register_finish">完成</string>
+    <string name="register_name">姓名</string>
+    <string name="gender">性别</string>
+    <string name="gender_male">男</string>
+    <string name="gender_female">女</string>
+    <string name="register_nation">民族</string>
+    <string name="register_company">工作单位</string>
+    <string name="register_school">毕业学校</string>
+    <string name="register_weight">体重</string>
+    <string name="register_height">身高</string>
+    <string name="register_hometown">家乡</string>
+    <string name="register_age">年龄</string>
     <string name="app_display_name">手机QQ2012</string>
     <string name="group_online">在线好友</string>
     <string name="group_stranger">陌生人</string>

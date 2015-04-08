@@ -2,6 +2,10 @@
 <resources>
 
     <color name="white">#ffffff</color>
+    <color name="green_01">#FFB4EEB4</color>
+    <color name="green_02">#FFC1FFC1</color>
+    <color name="green_03">#FF7CCD7C</color>
+    <color name="background">#F0FFF0</color>
     <color name="gold">#b89766</color>
     <color name="window_bg">#ffeef1f3</color>
     <color name="title_bg">#ff54acea</color>

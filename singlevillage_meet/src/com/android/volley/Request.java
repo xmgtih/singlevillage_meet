@@ -396,6 +396,10 @@ public abstract class Request<T> implements Comparable<Request<T>> {
         if (postParams != null && postParams.size() > 0) {
             return encodeParameters(postParams, getPostParamsEncoding());
         }
+        String content = getPostContent();
+        if(!TextUtils.isEmpty(content)){
+        	return encodeContent(content, getParamsEncoding());
+        }
         return null;
     }
 
@@ -410,7 +414,13 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     protected Map<String, String> getParams() throws AuthFailureError {
         return null;
     }
+    
+    protected String getPostContent() throws AuthFailureError {
+        return null;
+    }
 
+    
+    
     /**
      * Returns which encoding should be used when converting POST or PUT parameters returned by
      * {@link #getParams()} into a raw POST or PUT body.
@@ -448,6 +458,10 @@ public abstract class Request<T> implements Comparable<Request<T>> {
         if (params != null && params.size() > 0) {
             return encodeParameters(params, getParamsEncoding());
         }
+        String content = getPostContent();
+        if(!TextUtils.isEmpty(content)){
+        	return encodeContent(content, getParamsEncoding());
+        }
         return null;
     }
 
@@ -467,6 +481,15 @@ public abstract class Request<T> implements Comparable<Request<T>> {
         } catch (UnsupportedEncodingException uee) {
             throw new RuntimeException("Encoding not supported: " + paramsEncoding, uee);
         }
+    }
+    private byte[] encodeContent(String content, String paramsEncoding) {
+    	
+    	try {
+			    return URLEncoder.encode(content, paramsEncoding).getBytes(paramsEncoding);
+		    } catch (UnsupportedEncodingException uee) {
+			// TODO Auto-generated catch block
+            throw new RuntimeException("Encoding not supported: " + paramsEncoding, uee);
+		}
     }
 
     /**

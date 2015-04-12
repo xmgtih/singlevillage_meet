@@ -42,11 +42,13 @@ import com.singlevillage.meet.common.bean.User;
 import com.singlevillage.meet.common.tran.bean.TranObject;
 import com.singlevillage.meet.common.tran.bean.TranObjectType;
 import com.singlevillage.meet.common.util.Constants;
+import com.singlevillage.meet.service.GetMsgService;
 import com.singlevillage.meet.util.GroupFriend;
 import com.singlevillage.meet.util.MessageDB;
 import com.singlevillage.meet.util.MyDate;
 import com.singlevillage.meet.util.SharePreferenceUtil;
 import com.singlevillage.meet.util.UserDB;
+import com.singlevillage.meet.view.MyListView;
 
 /**
  * 好友列表的Activity

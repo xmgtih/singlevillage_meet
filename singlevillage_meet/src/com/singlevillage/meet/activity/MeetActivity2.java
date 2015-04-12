@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.singlevillage.meet.common.tran.bean.TranObject;
+import com.singlevillage.meet.fragment.MeetOne2MultiFragment;
 import com.singlevillage.meet.view.ChangeColorIconWithTextView;
 
 public class MeetActivity2 extends MyActivity implements OnClickListener{

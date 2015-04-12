@@ -29,6 +29,7 @@ import com.singlevillage.meet.common.bean.User;
 import com.singlevillage.meet.common.tran.bean.TranObject;
 import com.singlevillage.meet.common.tran.bean.TranObjectType;
 import com.singlevillage.meet.common.util.Constants;
+import com.singlevillage.meet.service.GetMsgService;
 import com.singlevillage.meet.util.DialogFactory;
 import com.singlevillage.meet.util.Encode;
 import com.singlevillage.meet.util.SharePreferenceUtil;

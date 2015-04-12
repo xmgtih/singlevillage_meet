@@ -39,7 +39,7 @@
             android:windowSoftInputMode="stateVisible" >
         </activity>
 
-        <service android:name="com.singlevillage.meet.activity.GetMsgService" >
+        <service android:name="com.singlevillage.meet.service.GetMsgService" >
         </service>
 
         <activity

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.singlevillage.meet.common.tran.bean.TranObject;
+import com.singlevillage.meet.fragment.MeetStartFragment;
+import com.singlevillage.meet.fragment.MeetUnstartFragment;
 
 public class MeetActivity extends MyActivity {
 	

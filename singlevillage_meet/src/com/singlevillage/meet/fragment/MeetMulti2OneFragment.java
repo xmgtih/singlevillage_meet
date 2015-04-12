@@ -1,5 +1,8 @@
-package com.singlevillage.meet.activity;
+package com.singlevillage.meet.fragment;
 
+
+import com.singlevillage.meet.activity.R;
+import com.singlevillage.meet.activity.R.layout;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

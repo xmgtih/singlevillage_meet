@@ -1,6 +1,7 @@
 package com.singlevillage.meet.util;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -34,6 +35,22 @@ public class Utils {
 
 		}
 		return 1.0f;
+	}
+	
+	public static int optInt(final String string, final int def) 
+	{
+		try 
+		{
+			if(!TextUtils.isEmpty(string))
+			{
+				return Integer.parseInt(string);
+			}
+		} 
+		catch (NumberFormatException e) 
+		{
+			
+		}
+		return def;
 	}
 
 }

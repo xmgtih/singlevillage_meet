@@ -3,17 +3,28 @@ package com.singlevillage.meet.activity;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.test.UiThreadTest;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.singlevillage.meet.client.Client;
 import com.singlevillage.meet.client.ClientOutputThread;
 import com.singlevillage.meet.common.bean.User;
@@ -21,6 +32,9 @@ import com.singlevillage.meet.common.tran.bean.TranObject;
 import com.singlevillage.meet.common.tran.bean.TranObjectType;
 import com.singlevillage.meet.util.DialogFactory;
 import com.singlevillage.meet.util.Encode;
+import com.singlevillage.meet.util.ErrorCodeHelper;
+import com.singlevillage.meet.util.HttpUtils;
+import com.singlevillage.meet.util.Utils;
 
 public class RegisterActivity extends MyActivity implements OnClickListener {
 
@@ -28,24 +42,155 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 	private Button mRegBack;
 	private EditText mRegPhoneNum;
 	private MyCount   mMyCount;
-	private MyApplication application;
+	private MyApplication mApplication;
+	private RadioGroup  mRadiogroup;
+	private RadioButton  mMale;
+	private RadioButton  mFemale;
+	private String mSex = "";
+	private String mName;
+	private String mHomeTown;
+	private String mTel;
+	private int    mAge;
+	private int    mHeight;//cm
+	private int    mWeight;//kg
+	private String mSchool;
+	private String mCompany;
+	private Button mRegFinishButton;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.register_input_phone_num);
-		application = (MyApplication) this.getApplicationContext();
+		setContentView(R.layout.register_information_singlevillage);
+		mApplication = (MyApplication) this.getApplicationContext();
 		initView();
+		
 
 	}
 
 	public void initView() {
-		mBtnRegister = (Button) findViewById(R.id.register_btn);
-		mRegBack = (Button) findViewById(R.id.reg_back_btn);
-		mBtnRegister.setOnClickListener(this);
-		mRegBack.setOnClickListener(this);
+		
+		EditText nameText = (EditText)findViewById(R.id.input_name);
+		mName = nameText.getText().toString();
+		mRadiogroup = (RadioGroup)findViewById(R.id.select_gender);
+		mMale = (RadioButton)findViewById(R.id.male);
+	    mFemale = (RadioButton)findViewById(R.id.female);
+		mRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
-		mRegPhoneNum = (EditText) findViewById(R.id.reg_phone_num);
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+				if(checkedId == mMale.getId()){
+					mSex = "male";
+				}else if(checkedId == mFemale.getId()){
+					mSex = "female";
+				}
+			} 
+			
+		});
+		
+		EditText ageText = (EditText)findViewById(R.id.input_age);
+		mAge = Utils.optInt(ageText.getText().toString(),0);
+		
+		EditText homeTownText = (EditText)findViewById(R.id.input_hometown);
+		mHomeTown = homeTownText.getText().toString();
+		
+		EditText heightText = (EditText)findViewById(R.id.input_height);
+		mHeight = Utils.optInt(heightText.getText().toString(),0);
+		
+		EditText weightText = (EditText)findViewById(R.id.input_weight);
+		mWeight = Utils.optInt(weightText.getText().toString(),0);		
+		
+		EditText schoolText = (EditText)findViewById(R.id.input_shool);
+		mSchool = schoolText.getText().toString();
+		
+		EditText companyText = (EditText)findViewById(R.id.input_company);
+		mCompany = companyText.getText().toString();
+		
+		mRegFinishButton = (Button)findViewById(R.id.register_finish_btn);
+		mRegFinishButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				try {
+
+					JSONObject requestJson = new JSONObject();
+					requestJson.put("sex", mSex);
+					requestJson.put("password", "");//TODO
+					requestJson.put("age", mAge);
+					requestJson.put("name", mName);
+					requestJson.put("company", mCompany);
+					requestJson.put("education", mCompany);//TODO
+					requestJson.put("university", mCompany);//TODO
+					requestJson.put("hometown", mHomeTown);
+					requestJson.put("height", mHeight);
+					requestJson.put("nationality", mHeight);//TODO
+
+					JsonObjectRequest jsonRequest = new JsonObjectRequest(
+							Method.POST, HttpUtils.REGISTER, requestJson,
+							new Response.Listener<JSONObject>() {
+
+								@Override
+								public void onResponse(JSONObject response) {
+									Log.i(Utils.TAG,response.toString());
+									int retCode = response.optInt("code");
+									if (0 == retCode) {//ok
+										JSONObject data = response.optJSONObject("data");
+										if(null != data){
+//											mSharePreferenceUtil.setToken(data.optString("token"));
+//											goMeetActivity();
+										}else{
+//											DialogFactory.ToastDialog(LoginActivity.this,
+//													"单身村登录", "服务器异常");
+										}
+									}else if(retCode == ErrorCodeHelper.code.CODE_USER_NO_EXISTS){
+//										DialogFactory.ToastDialog(LoginActivity.this,
+//												"单身村登录", "用户不存在，请先注册");
+//										if (mDialog.isShowing())
+//											mDialog.dismiss();
+									}else{//账号密码错误
+//										DialogFactory.ToastDialog(LoginActivity.this, "单身村登录",
+//												"亲！您的帐号或密码错误哦");
+//										if (mDialog.isShowing())
+//											mDialog.dismiss();
+									}
+
+								}
+
+							}, new Response.ErrorListener() {
+
+								@Override
+								public void onErrorResponse(VolleyError error) {
+									if (mDialog.isShowing())
+										mDialog.dismiss();
+//									DialogFactory.ToastDialog(LoginActivity.this,
+//											"单身村登录", "网络有问题");
+								}
+							});
+
+					HttpUtils.sendJsonRequest(jsonRequest);
+					showRequestDialog();
+				} catch (JSONException e) {
+					if (mDialog.isShowing())
+						mDialog.dismiss();
+//					DialogFactory.ToastDialog(LoginActivity.this, "单身村登录",
+//							"请重新输入");
+				}
+				
+			}
+		});
+		
+		
+		
+		
+		
+		
+		
+//		mBtnRegister = (Button) findViewById(R.id.register_btn);
+//		mRegBack = (Button) findViewById(R.id.reg_back_btn);
+//		mBtnRegister.setOnClickListener(this);
+//		mRegBack.setOnClickListener(this);
+//
+//		mRegPhoneNum = (EditText) findViewById(R.id.reg_phone_num);
 
 	}
 

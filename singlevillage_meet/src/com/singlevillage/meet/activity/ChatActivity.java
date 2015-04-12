@@ -76,7 +76,7 @@ public class ChatActivity extends MyActivity implements OnClickListener {
 	 */
 	public void initData() {
 		List<ChatMsgEntity> list = messageDB.getMsg(user.getId());
-		if (list.size() > 0) {
+		if (null != list && list.size() > 0) {
 			for (ChatMsgEntity entity : list) {
 				if (entity.getName().equals("")) {
 					entity.setName(user.getName());

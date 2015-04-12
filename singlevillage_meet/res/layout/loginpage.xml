@@ -3,7 +3,7 @@
     android:id="@+id/loginpage"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#F0FFF0"
+    android:background="@color/green_02"
     android:orientation="vertical">
     
 	<TextView
@@ -28,7 +28,7 @@
          
         <TextView
 	    android:id="@+id/mdn"
-	    android:layout_width="wrap_content"
+	    android:layout_width="50dp"
         android:layout_height="wrap_content"              
         android:text="@string/mdn"
         android:textColor="@color/green_03"
@@ -58,7 +58,7 @@
          android:orientation="horizontal">  
        <TextView
 	    android:id="@+id/passwd"
-	    android:layout_width="wrap_content"
+	    android:layout_width="50dp"
         android:layout_height="wrap_content"        
         android:text="@string/sc_password"
         android:textColor="@color/green_03"
@@ -85,7 +85,7 @@
         android:layout_below="@id/input2"       
         android:layout_marginLeft="35.0dip"
         android:layout_marginRight="35.0dip"
-        android:layout_marginTop="70.0dip"
+        android:layout_marginTop="30.0dip"
         android:background="@color/green_03"
         android:gravity="center"
         android:paddingTop="5.0dip"
@@ -99,7 +99,7 @@
         android:layout_below="@id/login_btn"
         android:layout_marginLeft="35.0dip"
         android:layout_marginRight="35.0dip"
-        android:layout_marginTop="8.0dip"
+        android:layout_marginTop="20.0dip"
          >
 	<TextView
 	    android:id="@+id/regist_text"
@@ -108,7 +108,7 @@
         android:layout_alignParentLeft="true"
         android:text="@string/register_text"
         android:textColor="@color/green_03"
-        android:textSize="12.0sp" 
+        android:textSize="13.0sp" 
 	    />
      <TextView
 	    android:id="@+id/forget_passwd_text"
@@ -117,7 +117,7 @@
         android:layout_alignParentRight="true"         
         android:text="@string/forget_passwd"
         android:textColor="@color/green_03"
-        android:textSize="12.0sp" 
+        android:textSize="13.0sp" 
 	    />   
     
 	</RelativeLayout>

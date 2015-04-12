@@ -2,6 +2,9 @@ package com.singlevillage.meet.activity;
 
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -10,6 +13,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +27,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request.Method;
+import com.android.volley.Response;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.singlevillage.meet.client.Client;
 import com.singlevillage.meet.client.ClientOutputThread;
 import com.singlevillage.meet.common.bean.User;
@@ -32,8 +42,11 @@ import com.singlevillage.meet.common.util.Constants;
 import com.singlevillage.meet.service.GetMsgService;
 import com.singlevillage.meet.util.DialogFactory;
 import com.singlevillage.meet.util.Encode;
+import com.singlevillage.meet.util.ErrorCodeHelper;
+import com.singlevillage.meet.util.HttpUtils;
 import com.singlevillage.meet.util.SharePreferenceUtil;
 import com.singlevillage.meet.util.UserDB;
+import com.singlevillage.meet.util.Utils;
 
 /**
  * 登录
@@ -42,12 +55,14 @@ import com.singlevillage.meet.util.UserDB;
  * 
  */
 public class LoginActivity extends MyActivity implements OnClickListener {
+	
 	private TextView mBtnRegister;
 	private Button mBtnLogin;
 	private EditText mAccounts, mPassword;
 	private CheckBox mAutoSavePassword;
 	private MyApplication application;
 	private MenuInflater mi;// 菜单
+	private SharePreferenceUtil mSharePreferenceUtil;
 /*	private View mMoreView;// “更多登录选项”的view
 	private ImageView mMoreImage;// “更多登录选项”的箭头图片
 	private View mMoreMenuView;// “更多登录选项”中的内容view
@@ -58,6 +73,8 @@ public class LoginActivity extends MyActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.loginpage);
 		application = (MyApplication) this.getApplicationContext();
+		mSharePreferenceUtil = new SharePreferenceUtil(this, Constants.SAVE_USER);
+
 		initView();
 	//	mi = new MenuInflater(this);
 	}
@@ -167,67 +184,78 @@ public class LoginActivity extends MyActivity implements OnClickListener {
 		if (accounts.length() == 0 || password.length() == 0) {
 			DialogFactory.ToastDialog(this, "单身村登录", "亲！帐号或密码不能为空哦");
 		} else {
-			showRequestDialog();
-			// 通过Socket验证信息
-			if (application.isClientStart()) {
-				Client client = application.getClient();
-				ClientOutputThread out = client.getClientOutputThread();
-				TranObject<User> o = new TranObject<User>(TranObjectType.LOGIN);
-				User u = new User();
-				u.setId(Integer.parseInt(accounts));
-				u.setPassword(Encode.getEncode("MD5", password));
-				o.setObject(u);
-				out.setMsg(o);
-			} else {
+			
+			try {
+
+				JSONObject requestJson = new JSONObject();
+				requestJson.put("tel", accounts);
+				requestJson.put("password", password);
+				JsonObjectRequest jsonRequest = new JsonObjectRequest(
+						Method.POST, HttpUtils.LOG_IN, requestJson,
+						new Response.Listener<JSONObject>() {
+
+							@Override
+							public void onResponse(JSONObject response) {
+								Log.i(Utils.TAG,response.toString());
+								int retCode = response.optInt("code");
+								if (0 == retCode) {//ok
+									JSONObject data = response.optJSONObject("data");
+									if(null != data){
+										mSharePreferenceUtil.setToken(data.optString("token"));
+										goMeetActivity();
+									}else{
+										DialogFactory.ToastDialog(LoginActivity.this,
+												"单身村登录", "服务器异常");
+									}
+								}else if(retCode == ErrorCodeHelper.code.CODE_USER_NO_EXISTS){
+									DialogFactory.ToastDialog(LoginActivity.this,
+											"单身村登录", "用户不存在，请先注册");
+									if (mDialog.isShowing())
+										mDialog.dismiss();
+								}else{//账号密码错误
+									DialogFactory.ToastDialog(LoginActivity.this, "单身村登录",
+											"亲！您的帐号或密码错误哦");
+									if (mDialog.isShowing())
+										mDialog.dismiss();
+								}
+
+							}
+
+						}, new Response.ErrorListener() {
+
+							@Override
+							public void onErrorResponse(VolleyError error) {
+								if (mDialog.isShowing())
+									mDialog.dismiss();
+								DialogFactory.ToastDialog(LoginActivity.this,
+										"单身村登录", "网络有问题");
+							}
+						});
+
+				HttpUtils.sendJsonRequest(jsonRequest);
+				showRequestDialog();
+			} catch (JSONException e) {
 				if (mDialog.isShowing())
 					mDialog.dismiss();
 				DialogFactory.ToastDialog(LoginActivity.this, "单身村登录",
-						"亲！服务器暂未开放哦");
+						"请重新输入");
 			}
 		}
 	}
 
+	private void goMeetActivity(){
+		Intent i = new Intent(LoginActivity.this,
+				MeetActivity2.class);
+		startActivity(i);
+
+		if (mDialog.isShowing())
+			mDialog.dismiss();
+		finish();
+		Toast.makeText(getApplicationContext(), "登录成功", 0).show();
+	}
 	@Override
 	// 依据自己需求处理父类广播接收者收取到的消息
 	public void getMessage(TranObject msg) {
-		if (msg != null) {
-			// System.out.println("Login:" + msg);
-			switch (msg.getType()) {
-			case LOGIN:// LoginActivity只处理登录的消息
-				List<User> list = (List<User>) msg.getObject();
-				if (list.size() > 0) {
-					// 保存用户信息
-					SharePreferenceUtil util = new SharePreferenceUtil(
-							LoginActivity.this, Constants.SAVE_USER);
-					util.setId(mAccounts.getText().toString());
-					util.setPasswd(mPassword.getText().toString());
-					util.setEmail(list.get(0).getEmail());
-					util.setName(list.get(0).getName());
-					util.setImg(list.get(0).getImg());
-
-					UserDB db = new UserDB(LoginActivity.this);
-					db.addUser(list);
-
-					Intent i = new Intent(LoginActivity.this,
-							FriendListActivity.class);
-					i.putExtra(Constants.MSGKEY, msg);
-					startActivity(i);
-
-					if (mDialog.isShowing())
-						mDialog.dismiss();
-					finish();
-					Toast.makeText(getApplicationContext(), "登录成功", 0).show();
-				} else {
-					DialogFactory.ToastDialog(LoginActivity.this, "单身村登录",
-							"亲！您的帐号或密码错误哦");
-					if (mDialog.isShowing())
-						mDialog.dismiss();
-				}
-				break;
-			default:
-				break;
-			}
-		}
 	}
 
 	@Override

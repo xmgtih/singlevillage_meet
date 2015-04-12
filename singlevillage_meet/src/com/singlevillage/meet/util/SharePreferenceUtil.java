@@ -103,4 +103,15 @@ public class SharePreferenceUtil {
 	public boolean getisFirst() {
 		return sp.getBoolean("isFirst", true);
 	}
+	
+	// token
+	public void setToken(String token) {
+		editor.putString("token", token);
+		editor.commit();
+	}
+
+	public String getToken() {
+		return sp.getString("token", "");
+	}
+
 }

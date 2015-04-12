@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import com.singlevillage.meet.adapter.RecentChatAdapter;
 import com.singlevillage.meet.client.Client;
 import com.singlevillage.meet.common.util.Constants;
+import com.singlevillage.meet.util.GlobalVar;
 import com.singlevillage.meet.util.SharePreferenceUtil;
 
 import android.app.Application;
@@ -21,6 +22,7 @@ public class MyApplication extends Application {
 
 	@Override
 	public void onCreate() {
+		GlobalVar.setAppContext(this.getApplicationContext());
 		SharePreferenceUtil util = new SharePreferenceUtil(this,
 				Constants.SAVE_USER);
 		System.out.println(util.getIp() + " " + util.getPort());

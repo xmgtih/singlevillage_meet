@@ -6,6 +6,8 @@ import android.view.Display;
 import android.view.WindowManager;
 
 public class Utils {
+	
+	public static final String TAG = "meet";
 
 	public static int getScreenWidth(Context context) {
 		WindowManager manager = (WindowManager) context

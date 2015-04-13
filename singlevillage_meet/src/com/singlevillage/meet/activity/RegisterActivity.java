@@ -133,25 +133,18 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 								public void onResponse(JSONObject response) {
 									Log.i(Utils.TAG,response.toString());
 									int retCode = response.optInt("code");
-									if (0 == retCode) {//ok
-										JSONObject data = response.optJSONObject("data");
-										if(null != data){
-//											mSharePreferenceUtil.setToken(data.optString("token"));
-//											goMeetActivity();
-										}else{
-//											DialogFactory.ToastDialog(LoginActivity.this,
-//													"单身村登录", "服务器异常");
-										}
-									}else if(retCode == ErrorCodeHelper.code.CODE_USER_NO_EXISTS){
-//										DialogFactory.ToastDialog(LoginActivity.this,
-//												"单身村登录", "用户不存在，请先注册");
-//										if (mDialog.isShowing())
-//											mDialog.dismiss();
-									}else{//账号密码错误
-//										DialogFactory.ToastDialog(LoginActivity.this, "单身村登录",
-//												"亲！您的帐号或密码错误哦");
-//										if (mDialog.isShowing())
-//											mDialog.dismiss();
+									if (ErrorCodeHelper.code.CODE_SUCCESS == retCode) {//ok
+										//TODO 跳到登录
+										DialogFactory.ToastDialog(RegisterActivity.this, "单身村注册",
+												"注册成功，回登录界面登录试试吧");
+										if (mDialog.isShowing())
+											mDialog.dismiss();
+										
+									}else{//
+										DialogFactory.ToastDialog(RegisterActivity.this, "单身村注册",
+												"服务器异常");
+										if (mDialog.isShowing())
+											mDialog.dismiss();
 									}
 
 								}
@@ -162,8 +155,8 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 								public void onErrorResponse(VolleyError error) {
 									if (mDialog.isShowing())
 										mDialog.dismiss();
-//									DialogFactory.ToastDialog(LoginActivity.this,
-//											"单身村登录", "网络有问题");
+									DialogFactory.ToastDialog(RegisterActivity.this,
+											"单身村登录", "网络异常");
 								}
 							});
 
@@ -172,8 +165,8 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 				} catch (JSONException e) {
 					if (mDialog.isShowing())
 						mDialog.dismiss();
-//					DialogFactory.ToastDialog(LoginActivity.this, "单身村登录",
-//							"请重新输入");
+					DialogFactory.ToastDialog(RegisterActivity.this, "单身村注册",
+							"请重新输入");
 				}
 				
 			}

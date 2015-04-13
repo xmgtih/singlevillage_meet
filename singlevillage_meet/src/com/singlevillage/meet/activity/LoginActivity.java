@@ -157,7 +157,7 @@ public class LoginActivity extends MyActivity implements OnClickListener {
 	 */
 	public void goRegisterActivity() {
 		Intent intent = new Intent();
-		intent.setClass(this, RegisterActivity.class);
+		intent.setClass(this, RegisterVerifyActivity.class);
 		startActivity(intent);
 	}
 

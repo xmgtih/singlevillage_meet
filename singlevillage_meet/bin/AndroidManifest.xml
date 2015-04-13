@@ -86,6 +86,16 @@
             android:windowSoftInputMode="stateVisible" >
 
         </activity>
+        <activity
+            android:name="com.singlevillage.meet.activity.RegisterVerifyActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
+        <activity
+            android:name="com.singlevillage.meet.activity.RegisterNoticeActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,10 @@
 package com.singlevillage.meet.activity;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,23 +13,33 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.test.UiThreadTest;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.Request.Method;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.singlevillage.meet.adapter.CropOptionAdapter;
 import com.singlevillage.meet.client.Client;
 import com.singlevillage.meet.client.ClientOutputThread;
 import com.singlevillage.meet.common.bean.User;
@@ -38,7 +53,12 @@ import com.singlevillage.meet.util.Utils;
 
 public class RegisterActivity extends MyActivity implements OnClickListener {
 
+	private final int   PICK_FROM_FILE = 1;
+	private final int   PICK_FROM_CAMERA = 2; 
+	private final int   CROP_FROM_CAMERA = 3;
+	
 	private Button mBtnRegister;
+	private ImageView mPhotoView;
 	private Button mRegBack;
 	private EditText mRegPhoneNum;
 	private MyCount   mMyCount;
@@ -56,6 +76,7 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 	private String mSchool;
 	private String mCompany;
 	private Button mRegFinishButton;
+	private Uri mImgeUri;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,6 +90,17 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 
 	public void initView() {
 		
+		mPhotoView = (ImageView)findViewById(R.id.photo);
+		mPhotoView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent  openPicsIntent = new Intent(Intent.ACTION_PICK,  
+		                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				openPicsIntent.setType("image/*");
+				startActivityForResult(openPicsIntent, PICK_FROM_FILE);  
+			}
+		});
 		EditText nameText = (EditText)findViewById(R.id.input_name);
 		mName = nameText.getText().toString();
 		mRadiogroup = (RadioGroup)findViewById(R.id.select_gender);
@@ -186,6 +218,139 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 //		mRegPhoneNum = (EditText) findViewById(R.id.reg_phone_num);
 
 	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
+		if(RESULT_OK != resultCode){
+			return ;
+		}
+		
+	    if (resultCode != RESULT_OK) {  
+            return;  
+        }  
+        switch (requestCode) {  
+        case PICK_FROM_CAMERA:  
+            doCrop();  
+            break;  
+        case PICK_FROM_FILE:  
+            mImgeUri = data.getData();  
+            doCrop();  
+            break;  
+        case CROP_FROM_CAMERA:  
+            if (null != data) {  
+                setCropImg(data);  
+            }  
+            break;  
+        }
+		
+	}
+	
+	private void setCropImg(Intent picdata) {  
+        Bundle bundle = picdata.getExtras();  
+        if (null != bundle) {  
+            Bitmap mBitmap = bundle.getParcelable("data");  
+            mPhotoView.setImageBitmap(mBitmap);  
+            saveBitmap(Environment.getExternalStorageDirectory() + "/crop_"  
+                    + System.currentTimeMillis() + ".png", mBitmap);  
+        }  
+    }  
+	private void doCrop() {
+
+		final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
+		Intent intent = new Intent("com.android.camera.action.CROP");
+		intent.setType("image/*");
+		List<ResolveInfo> list = getPackageManager().queryIntentActivities(
+				intent, 0);
+		int size = list.size();
+
+		if (size == 0) {
+			Toast.makeText(this, "can't find crop app", Toast.LENGTH_SHORT)
+					.show();
+			return;
+		} else {
+			intent.setData(mImgeUri);
+			intent.putExtra("outputX", 600);
+			intent.putExtra("outputY", 600);
+			intent.putExtra("aspectX", 1);
+			intent.putExtra("aspectY", 1);
+			intent.putExtra("scale", true);
+			intent.putExtra("return-data", true);
+
+			// only one
+			if (size == 1) {
+				Intent i = new Intent(intent);
+				ResolveInfo res = list.get(0);
+				i.setComponent(new ComponentName(res.activityInfo.packageName,
+						res.activityInfo.name));
+				startActivityForResult(i, CROP_FROM_CAMERA);
+			} else {
+				// many crop app
+				for (ResolveInfo res : list) {
+					final CropOption co = new CropOption();
+					co.title = getPackageManager().getApplicationLabel(
+							res.activityInfo.applicationInfo);
+					co.icon = getPackageManager().getApplicationIcon(
+							res.activityInfo.applicationInfo);
+					co.appIntent = new Intent(intent);
+					co.appIntent
+							.setComponent(new ComponentName(
+									res.activityInfo.packageName,
+									res.activityInfo.name));
+					cropOptions.add(co);
+				}
+
+				CropOptionAdapter adapter = new CropOptionAdapter(
+						getApplicationContext(), cropOptions);
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle("choose a app");
+				builder.setAdapter(adapter,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int item) {
+								startActivityForResult(
+										cropOptions.get(item).appIntent,
+										CROP_FROM_CAMERA);
+							}
+						});
+
+				builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					@Override
+					public void onCancel(DialogInterface dialog) {
+
+						if (mImgeUri != null) {
+							getContentResolver().delete(mImgeUri, null, null);
+							mImgeUri = null;
+						}
+					}
+				});
+
+				AlertDialog alert = builder.create();
+				alert.show();
+			}
+		}
+	}
+	
+	private void saveBitmap(String fileName, Bitmap mBitmap) {  
+        File f = new File(fileName);  
+        FileOutputStream fOut = null;  
+        try {  
+            f.createNewFile();  
+            fOut = new FileOutputStream(f);  
+            mBitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);  
+            fOut.flush();  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        } finally {  
+            try {  
+                fOut.close();  
+                Toast.makeText(this, "save success", Toast.LENGTH_SHORT).show();  
+            } catch (IOException e) {  
+                e.printStackTrace();  
+            }  
+        }  
+  
+    }  
+	
 
 	private Dialog mDialog = null;
 

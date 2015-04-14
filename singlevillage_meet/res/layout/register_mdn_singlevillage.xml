@@ -3,7 +3,7 @@
 	android:id="@+id/register_mdn_singlevillage"   
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#F0FFF0"
+    android:background="@color/green_02"
     android:orientation="vertical">
     
 	<TextView

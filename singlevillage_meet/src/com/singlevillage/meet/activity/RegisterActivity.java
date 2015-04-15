@@ -1,6 +1,7 @@
 package com.singlevillage.meet.activity;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -48,7 +50,9 @@ import com.singlevillage.meet.common.tran.bean.TranObjectType;
 import com.singlevillage.meet.util.DialogFactory;
 import com.singlevillage.meet.util.Encode;
 import com.singlevillage.meet.util.ErrorCodeHelper;
+import com.singlevillage.meet.util.FileSystem;
 import com.singlevillage.meet.util.HttpUtils;
+import com.singlevillage.meet.util.IOUtil;
 import com.singlevillage.meet.util.Utils;
 
 public class RegisterActivity extends MyActivity implements OnClickListener {
@@ -77,12 +81,22 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 	private String mCompany;
 	private Button mRegFinishButton;
 	private Uri mImgeUri;
+	private Uri mCropImageUri;
+    public static final String CROP_CACHE_FILE_NAME = "crop_cache_file.jpg";
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.register_information_singlevillage);
 		mApplication = (MyApplication) this.getApplicationContext();
+//		File cropFile = FileSystem.getInternalFile(this, "crop", "temp.jpeg");
+//		IOUtil.createFile(cropFile);
+//		mCropImageUri = Uri.parse(cropFile.getAbsolutePath());
+		mCropImageUri = Uri
+        .fromFile(Environment.getExternalStorageDirectory())
+        .buildUpon()
+        .appendPath(CROP_CACHE_FILE_NAME)
+        .build();
 		initView();
 		
 
@@ -95,10 +109,11 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 			
 			@Override
 			public void onClick(View v) {
-				Intent  openPicsIntent = new Intent(Intent.ACTION_PICK,  
-		                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-				openPicsIntent.setType("image/*");
-				startActivityForResult(openPicsIntent, PICK_FROM_FILE);  
+//				Intent  openPicsIntent = new Intent(Intent.ACTION_PICK,  
+//		                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//				openPicsIntent.setType("image/*");
+//				startActivityForResult(openPicsIntent, PICK_FROM_FILE);
+				doCrop2();
 			}
 		});
 		EditText nameText = (EditText)findViewById(R.id.input_name);
@@ -230,15 +245,19 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
         }  
         switch (requestCode) {  
         case PICK_FROM_CAMERA:  
-            doCrop();  
+            doCrop2();  
             break;  
         case PICK_FROM_FILE:  
             mImgeUri = data.getData();  
-            doCrop();  
+            doCrop2();  
             break;  
         case CROP_FROM_CAMERA:  
-            if (null != data) {  
-                setCropImg(data);  
+            if (null != mCropImageUri) {  
+//                setCropImg(data);  
+            	Bitmap  bitmap = decodeUriAsBitmap(mCropImageUri);
+            	 mPhotoView.setImageBitmap(bitmap);  
+                 saveBitmap(Environment.getExternalStorageDirectory() + "/crop_"  
+                         + System.currentTimeMillis() + ".jpeg", bitmap);  
             }  
             break;  
         }
@@ -254,6 +273,17 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
                     + System.currentTimeMillis() + ".png", mBitmap);  
         }  
     }  
+	
+    private Bitmap decodeUriAsBitmap(Uri uri) {
+        Bitmap bitmap = null;
+        try {
+            bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return bitmap;
+    }
 	private void doCrop() {
 
 		final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
@@ -274,7 +304,9 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 			intent.putExtra("aspectX", 1);
 			intent.putExtra("aspectY", 1);
 			intent.putExtra("scale", true);
-			intent.putExtra("return-data", true);
+			
+			intent.putExtra("return-data", false);
+			intent.putExtra("output", mCropImageUri);
 
 			// only one
 			if (size == 1) {
@@ -328,6 +360,37 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 				alert.show();
 			}
 		}
+	}
+	
+	private void doCrop2()
+	{
+
+
+		Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+
+		intent.setDataAndType(mCropImageUri, "image/*");
+
+		intent.putExtra("crop", "true");
+
+		intent.putExtra("aspectX", 2);
+
+		intent.putExtra("aspectY", 1);
+
+		intent.putExtra("outputX", 600);
+
+		intent.putExtra("outputY", 300);
+
+		intent.putExtra("scale", true);
+
+		intent.putExtra("return-data", false);
+
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropImageUri);
+
+		intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+
+		intent.putExtra("noFaceDetection", true); // no face detection
+
+		startActivityForResult(intent, CROP_FROM_CAMERA);
 	}
 	
 	private void saveBitmap(String fileName, Bitmap mBitmap) {  

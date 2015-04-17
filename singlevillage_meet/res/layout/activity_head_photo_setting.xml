@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout 
+        android:id="@+id/headImageViewContainer"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="top|center"
+        >
+    <!--     
+    <com.edmodo.cropper.CropImageView
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/headImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center|top"
+        android:visibility="visible"
+        android:contentDescription="NPYSAB"
+         />    
+         -->
+    </FrameLayout>
+    
+
+    <Button
+        android:id="@+id/settingButton"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_vertical"
+        android:text="设置头像"
+        android:visibility="gone"
+        android:textSize="20sp" />
+
+</LinearLayout>

@@ -109,11 +109,11 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 			
 			@Override
 			public void onClick(View v) {
-//				Intent  openPicsIntent = new Intent(Intent.ACTION_PICK,  
-//		                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//				openPicsIntent.setType("image/*");
-//				startActivityForResult(openPicsIntent, PICK_FROM_FILE);
-				doCrop2();
+				Intent  openPicsIntent = new Intent(Intent.ACTION_PICK,  
+		                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				openPicsIntent.setType("image/*");
+				startActivityForResult(openPicsIntent, PICK_FROM_FILE);
+//				doCrop2();
 			}
 		});
 		EditText nameText = (EditText)findViewById(R.id.input_name);

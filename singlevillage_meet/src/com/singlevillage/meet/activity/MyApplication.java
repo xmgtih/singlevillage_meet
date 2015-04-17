@@ -12,6 +12,7 @@ import android.app.Application;
 import android.app.NotificationManager;
 
 public class MyApplication extends Application {
+	public static final String TAG = "meet";
 	private Client client;// 客户端
 	private boolean isClientStart;// 客户端连接是否启动
 	private NotificationManager mNotificationManager;

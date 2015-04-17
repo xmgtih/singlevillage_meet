@@ -9,6 +9,22 @@ package com.singlevillage.meet.activity;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int aspectRatioX=0x7f010008;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int aspectRatioY=0x7f010009;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -28,10 +44,34 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int color=0x7f010001;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int fixAspectRatio=0x7f010007;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>on</code></td><td>2</td><td></td></tr>
+<tr><td><code>onTouch</code></td><td>1</td><td></td></tr>
+<tr><td><code>off</code></td><td>0</td><td></td></tr>
+</table>
+         */
+        public static final int guidelines=0x7f010006;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int icon=0x7f010000;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int imageResource=0x7f01000a;
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -640,322 +680,334 @@ containing a value of this type.
         public static final int yellow=0x7f06008e;
     }
     public static final class drawable {
-        public static final int abc_ab_share_pack_holo_dark=0x7f020000;
-        public static final int abc_cab_background_top_holo_light=0x7f020001;
-        public static final int account_current=0x7f020002;
-        public static final int acm_bg_diaglog=0x7f020003;
-        public static final int addfriends_icon_icon=0x7f020004;
-        public static final int arrow_down=0x7f020005;
-        public static final int arrow_up=0x7f020006;
-        public static final int balloon_l=0x7f020007;
-        public static final int balloon_l_pressed=0x7f020008;
-        public static final int balloon_r=0x7f020009;
-        public static final int balloon_r_pressed=0x7f02000a;
-        public static final int base_empty_view=0x7f02000b;
-        public static final int bg_button=0x7f02000c;
-        public static final int bg_button_pressed=0x7f02000d;
-        public static final int biz_pics_ic_back_normal=0x7f02000e;
-        public static final int biz_pics_ic_back_pressed=0x7f02000f;
-        public static final int button_text_color=0x7f020010;
-        public static final int chat_bottom_send_normal=0x7f020011;
-        public static final int chat_bottom_send_pressed=0x7f020012;
-        public static final int chat_send_button_bg=0x7f020013;
-        public static final int chatfrom_bg=0x7f020014;
-        public static final int chatto_bg=0x7f020015;
-        public static final int checkbox_bg1=0x7f020016;
-        public static final int checkbox_selected=0x7f020017;
-        public static final int checkbox_selected_press=0x7f020018;
-        public static final int checkbox_unselect=0x7f020019;
-        public static final int checkbox_unselect_press=0x7f02001a;
-        public static final int dialog_bg=0x7f02001b;
-        public static final int edittext1=0x7f02001c;
-        public static final int f007=0x7f02001d;
-        public static final int f1=0x7f02001e;
-        public static final int f2=0x7f02001f;
-        public static final int f3=0x7f020020;
-        public static final int f4=0x7f020021;
-        public static final int f5=0x7f020022;
-        public static final int f6=0x7f020023;
-        public static final int f7=0x7f020024;
-        public static final int f8=0x7f020025;
-        public static final int f9=0x7f020026;
-        public static final int friend_item=0x7f020027;
-        public static final int gender_checked=0x7f020028;
-        public static final int gender_unchecked=0x7f020029;
-        public static final int group_fold_arrow=0x7f02002a;
-        public static final int group_unfold_arrow=0x7f02002b;
-        public static final int guide_round=0x7f02002c;
-        public static final int h001=0x7f02002d;
-        public static final int ic_menu_allfriends=0x7f02002e;
-        public static final int ic_menu_cc=0x7f02002f;
-        public static final int ic_menu_emoticons=0x7f020030;
-        public static final int ic_menu_friendslist=0x7f020031;
-        public static final int ic_menu_myplaces=0x7f020032;
-        public static final int ic_menu_start_conversation=0x7f020033;
-        public static final int icon=0x7f020034;
-        public static final int img_select=0x7f020035;
-        public static final int info_bg=0x7f020036;
-        public static final int layout_bg1=0x7f020037;
-        public static final int lbs_notice=0x7f020038;
-        public static final int list_group=0x7f020039;
-        public static final int login_bg=0x7f02003a;
-        public static final int login_button_bg=0x7f02003b;
-        public static final int login_button_nor=0x7f02003c;
-        public static final int login_button_press=0x7f02003d;
-        public static final int login_input=0x7f02003e;
-        public static final int login_more=0x7f02003f;
-        public static final int login_more_up=0x7f020040;
-        public static final int login_moremenu_back=0x7f020041;
-        public static final int login_pic2=0x7f020042;
-        public static final int login_reg_normal=0x7f020043;
-        public static final int login_reg_pressed=0x7f020044;
-        public static final int login_regist_bg=0x7f020045;
-        public static final int menu_exit=0x7f020046;
-        public static final int menu_setting=0x7f020047;
-        public static final int mini_avatar_shadow=0x7f020048;
-        public static final int mm_title_back_focused=0x7f020049;
-        public static final int mm_title_back_normal=0x7f02004a;
-        public static final int mm_title_back_pressed=0x7f02004b;
-        public static final int mm_title_btn_contact_normal=0x7f02004c;
-        public static final int mmtitle_bg=0x7f02004d;
-        public static final int myheader_bg=0x7f02004e;
-        public static final int notify=0x7f02004f;
-        public static final int notify_newmessage=0x7f020050;
-        public static final int op_bg_selector=0x7f020051;
-        public static final int progressbar=0x7f020052;
-        public static final int pull_to_refresh_header_background=0x7f020053;
-        public static final int qiqiu=0x7f020054;
-        public static final int radio=0x7f020055;
-        public static final int recent_newmessage=0x7f020056;
-        public static final int sc_app_bg_nor=0x7f020057;
-        public static final int sc_app_bg_pressed=0x7f020058;
-        public static final int sc_bg_friendsavatar=0x7f020059;
-        public static final int sc_bg_friendsavatar_nor=0x7f02005a;
-        public static final int sc_bg_friendsavatar_press=0x7f02005b;
-        public static final int sc_lab_bar_avatar_bg=0x7f02005c;
-        public static final int sc_messagebubble_bg_nor=0x7f02005d;
-        public static final int selector_btn_back=0x7f02005e;
-        public static final int selector_tab_home=0x7f02005f;
-        public static final int selector_tab_right=0x7f020060;
-        public static final int shape_bg=0x7f020061;
-        public static final int shape_dialog=0x7f020062;
-        public static final int shape_line=0x7f020063;
-        public static final int splash=0x7f020064;
-        public static final int splash_0=0x7f020065;
-        public static final int tab1=0x7f020066;
-        public static final int tab1_normal=0x7f020067;
-        public static final int tab1_over=0x7f020068;
-        public static final int tab2=0x7f020069;
-        public static final int tab2_normal=0x7f02006a;
-        public static final int tab2_over=0x7f02006b;
-        public static final int tab3=0x7f02006c;
-        public static final int tab3_normal=0x7f02006d;
-        public static final int tab3_over=0x7f02006e;
-        public static final int tab_address_normal=0x7f02006f;
-        public static final int tab_find_frd_normal=0x7f020070;
-        public static final int tab_home_normal=0x7f020071;
-        public static final int tab_home_selected=0x7f020072;
-        public static final int tab_n=0x7f020073;
-        public static final int tab_right_n=0x7f020074;
-        public static final int tab_settings_normal=0x7f020075;
-        public static final int tab_weixin_normal=0x7f020076;
-        public static final int tabbg=0x7f020077;
-        public static final int title_bar=0x7f020078;
-        public static final int top_back_left=0x7f020079;
-        public static final int top_back_leftpress=0x7f02007a;
-        public static final int topbar_select=0x7f02007b;
-        public static final int vpi__tab_selected_pressed_holo=0x7f02007c;
-        public static final int weixin=0x7f02007d;
+        public static final int aaaa=0x7f020000;
+        public static final int abc_ab_share_pack_holo_dark=0x7f020001;
+        public static final int abc_cab_background_top_holo_light=0x7f020002;
+        public static final int account_current=0x7f020003;
+        public static final int acm_bg_diaglog=0x7f020004;
+        public static final int addfriends_icon_icon=0x7f020005;
+        public static final int andy=0x7f020006;
+        public static final int arrow_down=0x7f020007;
+        public static final int arrow_up=0x7f020008;
+        public static final int balloon_l=0x7f020009;
+        public static final int balloon_l_pressed=0x7f02000a;
+        public static final int balloon_r=0x7f02000b;
+        public static final int balloon_r_pressed=0x7f02000c;
+        public static final int base_empty_view=0x7f02000d;
+        public static final int bg_button=0x7f02000e;
+        public static final int bg_button_pressed=0x7f02000f;
+        public static final int biz_pics_ic_back_normal=0x7f020010;
+        public static final int biz_pics_ic_back_pressed=0x7f020011;
+        public static final int butterfly=0x7f020012;
+        public static final int button_text_color=0x7f020013;
+        public static final int chat_bottom_send_normal=0x7f020014;
+        public static final int chat_bottom_send_pressed=0x7f020015;
+        public static final int chat_send_button_bg=0x7f020016;
+        public static final int chatfrom_bg=0x7f020017;
+        public static final int chatto_bg=0x7f020018;
+        public static final int checkbox_bg1=0x7f020019;
+        public static final int checkbox_selected=0x7f02001a;
+        public static final int checkbox_selected_press=0x7f02001b;
+        public static final int checkbox_unselect=0x7f02001c;
+        public static final int checkbox_unselect_press=0x7f02001d;
+        public static final int dialog_bg=0x7f02001e;
+        public static final int edittext1=0x7f02001f;
+        public static final int f007=0x7f020020;
+        public static final int f1=0x7f020021;
+        public static final int f2=0x7f020022;
+        public static final int f3=0x7f020023;
+        public static final int f4=0x7f020024;
+        public static final int f5=0x7f020025;
+        public static final int f6=0x7f020026;
+        public static final int f7=0x7f020027;
+        public static final int f8=0x7f020028;
+        public static final int f9=0x7f020029;
+        public static final int friend_item=0x7f02002a;
+        public static final int gender_checked=0x7f02002b;
+        public static final int gender_unchecked=0x7f02002c;
+        public static final int group_fold_arrow=0x7f02002d;
+        public static final int group_unfold_arrow=0x7f02002e;
+        public static final int guide_round=0x7f02002f;
+        public static final int h001=0x7f020030;
+        public static final int ic_menu_allfriends=0x7f020031;
+        public static final int ic_menu_cc=0x7f020032;
+        public static final int ic_menu_emoticons=0x7f020033;
+        public static final int ic_menu_friendslist=0x7f020034;
+        public static final int ic_menu_myplaces=0x7f020035;
+        public static final int ic_menu_start_conversation=0x7f020036;
+        public static final int icon=0x7f020037;
+        public static final int img_select=0x7f020038;
+        public static final int info_bg=0x7f020039;
+        public static final int layout_bg1=0x7f02003a;
+        public static final int lbs_notice=0x7f02003b;
+        public static final int list_group=0x7f02003c;
+        public static final int login_bg=0x7f02003d;
+        public static final int login_button_bg=0x7f02003e;
+        public static final int login_button_nor=0x7f02003f;
+        public static final int login_button_press=0x7f020040;
+        public static final int login_input=0x7f020041;
+        public static final int login_more=0x7f020042;
+        public static final int login_more_up=0x7f020043;
+        public static final int login_moremenu_back=0x7f020044;
+        public static final int login_pic2=0x7f020045;
+        public static final int login_reg_normal=0x7f020046;
+        public static final int login_reg_pressed=0x7f020047;
+        public static final int login_regist_bg=0x7f020048;
+        public static final int menu_exit=0x7f020049;
+        public static final int menu_setting=0x7f02004a;
+        public static final int mini_avatar_shadow=0x7f02004b;
+        public static final int mm_title_back_focused=0x7f02004c;
+        public static final int mm_title_back_normal=0x7f02004d;
+        public static final int mm_title_back_pressed=0x7f02004e;
+        public static final int mm_title_btn_contact_normal=0x7f02004f;
+        public static final int mmtitle_bg=0x7f020050;
+        public static final int myheader_bg=0x7f020051;
+        public static final int notify=0x7f020052;
+        public static final int notify_newmessage=0x7f020053;
+        public static final int op_bg_selector=0x7f020054;
+        public static final int progressbar=0x7f020055;
+        public static final int pull_to_refresh_header_background=0x7f020056;
+        public static final int qiqiu=0x7f020057;
+        public static final int radio=0x7f020058;
+        public static final int recent_newmessage=0x7f020059;
+        public static final int sc_app_bg_nor=0x7f02005a;
+        public static final int sc_app_bg_pressed=0x7f02005b;
+        public static final int sc_bg_friendsavatar=0x7f02005c;
+        public static final int sc_bg_friendsavatar_nor=0x7f02005d;
+        public static final int sc_bg_friendsavatar_press=0x7f02005e;
+        public static final int sc_lab_bar_avatar_bg=0x7f02005f;
+        public static final int sc_messagebubble_bg_nor=0x7f020060;
+        public static final int selector_btn_back=0x7f020061;
+        public static final int selector_tab_home=0x7f020062;
+        public static final int selector_tab_right=0x7f020063;
+        public static final int shape_bg=0x7f020064;
+        public static final int shape_dialog=0x7f020065;
+        public static final int shape_line=0x7f020066;
+        public static final int splash=0x7f020067;
+        public static final int splash_0=0x7f020068;
+        public static final int tab1=0x7f020069;
+        public static final int tab1_normal=0x7f02006a;
+        public static final int tab1_over=0x7f02006b;
+        public static final int tab2=0x7f02006c;
+        public static final int tab2_normal=0x7f02006d;
+        public static final int tab2_over=0x7f02006e;
+        public static final int tab3=0x7f02006f;
+        public static final int tab3_normal=0x7f020070;
+        public static final int tab3_over=0x7f020071;
+        public static final int tab_address_normal=0x7f020072;
+        public static final int tab_find_frd_normal=0x7f020073;
+        public static final int tab_home_normal=0x7f020074;
+        public static final int tab_home_selected=0x7f020075;
+        public static final int tab_n=0x7f020076;
+        public static final int tab_right_n=0x7f020077;
+        public static final int tab_settings_normal=0x7f020078;
+        public static final int tab_weixin_normal=0x7f020079;
+        public static final int tabbg=0x7f02007a;
+        public static final int title_bar=0x7f02007b;
+        public static final int top_back_left=0x7f02007c;
+        public static final int top_back_leftpress=0x7f02007d;
+        public static final int topbar_select=0x7f02007e;
+        public static final int vpi__tab_selected_pressed_holo=0x7f02007f;
+        public static final int weixin=0x7f020080;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f050003;
-        public static final int RelativeLayout1=0x7f050013;
-        public static final int RelativeLayout2=0x7f05004e;
-        public static final int again_receive_verify=0x7f050082;
-        public static final int age=0x7f05005e;
-        public static final int article=0x7f050043;
-        public static final int bodylayout=0x7f05001b;
-        public static final int chat_back=0x7f050005;
-        public static final int chat_editmessage=0x7f05000a;
-        public static final int chat_name=0x7f050006;
-        public static final int chat_send=0x7f050009;
+        public static final int CropOverlayView=0x7f050015;
+        public static final int ImageView_image=0x7f050014;
+        public static final int LinearLayout1=0x7f050008;
+        public static final int RelativeLayout1=0x7f05001a;
+        public static final int RelativeLayout2=0x7f050055;
+        public static final int again_receive_verify=0x7f050089;
+        public static final int age=0x7f050065;
+        public static final int article=0x7f05004a;
+        public static final int bodylayout=0x7f050022;
+        public static final int chat_back=0x7f05000a;
+        public static final int chat_editmessage=0x7f05000f;
+        public static final int chat_name=0x7f05000b;
+        public static final int chat_send=0x7f05000e;
         public static final int circle=0x7f050000;
-        public static final int company=0x7f05006d;
-        public static final int content_001=0x7f050044;
-        public static final int female=0x7f05005c;
-        public static final int finish_register=0x7f050053;
-        public static final int forget_passwd_text=0x7f050033;
-        public static final int friend_list_myImg=0x7f050014;
-        public static final int friend_list_myName=0x7f050015;
-        public static final int friend_menu_add=0x7f050090;
-        public static final int friend_menu_exit=0x7f050091;
-        public static final int gender=0x7f050059;
-        public static final int head_arrowImageView=0x7f05001e;
-        public static final int head_contentLayout=0x7f05001d;
-        public static final int head_lastUpdatedTextView=0x7f050021;
-        public static final int head_photos=0x7f050040;
-        public static final int head_progressBar=0x7f05001f;
-        public static final int head_tipsTextView=0x7f050020;
-        public static final int height=0x7f050064;
-        public static final int hometown=0x7f050061;
-        public static final int id_faxian=0x7f05008b;
-        public static final int id_indicator_one=0x7f05003a;
-        public static final int id_indicator_three=0x7f05003c;
-        public static final int id_indicator_two=0x7f05003b;
-        public static final int id_item=0x7f050024;
-        public static final int id_liaotian=0x7f050089;
-        public static final int id_qiqiu=0x7f050041;
-        public static final int id_tab_faxian_ly=0x7f05008a;
-        public static final int id_tab_liaotian_ly=0x7f050088;
-        public static final int id_tab_line=0x7f05008e;
-        public static final int id_tab_tongxunlu_ly=0x7f05008c;
-        public static final int id_tongxunlu=0x7f05008d;
-        public static final int imageView1=0x7f050016;
-        public static final int imageView_item=0x7f050022;
-        public static final int input1=0x7f05002b;
-        public static final int input2=0x7f05002e;
-        public static final int input_age=0x7f05005f;
-        public static final int input_company=0x7f05006e;
-        public static final int input_height=0x7f050065;
-        public static final int input_hometown=0x7f050062;
-        public static final int input_mdn=0x7f05002d;
-        public static final int input_mdn_layout=0x7f050079;
-        public static final int input_name=0x7f050057;
-        public static final int input_nation=0x7f050071;
-        public static final int input_passwd=0x7f050030;
-        public static final int input_shool=0x7f05006b;
-        public static final int input_verify=0x7f050081;
-        public static final int input_weight=0x7f050068;
-        public static final int interest_topic=0x7f05003e;
-        public static final int iv_icon=0x7f05000f;
-        public static final int iv_userhead=0x7f05000c;
-        public static final int layout_nagtivie=0x7f050002;
-        public static final int listview=0x7f050007;
-        public static final int lllayout=0x7f050087;
-        public static final int login_btn=0x7f050031;
-        public static final int login_menu_exit=0x7f050093;
-        public static final int login_menu_setting=0x7f050092;
-        public static final int loginpage=0x7f050029;
-        public static final int ly_main_weixin=0x7f050034;
-        public static final int main_radio=0x7f050025;
-        public static final int male=0x7f05005b;
-        public static final int mdn=0x7f05002c;
-        public static final int meet_layout=0x7f050035;
-        public static final int meet_view=0x7f050038;
-        public static final int meet_viewpager=0x7f050039;
-        public static final int msg=0x7f050036;
-        public static final int name=0x7f050042;
-        public static final int name_item=0x7f050023;
-        public static final int nation=0x7f050070;
-        public static final int notice_text=0x7f050080;
-        public static final int notice_title=0x7f05007d;
-        public static final int notify_imageLog=0x7f050046;
-        public static final int notify_msg=0x7f050048;
-        public static final int notify_name=0x7f050047;
-        public static final int notify_time=0x7f050049;
-        public static final int passwd=0x7f05002f;
-        public static final int personal_msg=0x7f050037;
-        public static final int photo=0x7f050055;
-        public static final int radio_discovery=0x7f050028;
-        public static final int radio_hot=0x7f050027;
-        public static final int radio_recommend=0x7f050026;
-        public static final int recent_msg=0x7f05004f;
-        public static final int recent_name=0x7f05004c;
-        public static final int recent_new_num=0x7f050050;
-        public static final int recent_time=0x7f05004d;
-        public static final int recent_userhead=0x7f05004b;
-        public static final int reg_back_btn=0x7f050074;
-        public static final int reg_phone_num=0x7f050075;
-        public static final int regist_text=0x7f050032;
-        public static final int register_age_layout=0x7f05005d;
-        public static final int register_btn=0x7f050076;
-        public static final int register_company_layout=0x7f05006c;
-        public static final int register_finish_btn=0x7f050073;
-        public static final int register_finish_layout=0x7f050072;
-        public static final int register_gender_layout=0x7f050058;
-        public static final int register_height_layout=0x7f050063;
-        public static final int register_hometown_layout=0x7f050060;
-        public static final int register_information_singlevillage=0x7f050054;
-        public static final int register_mdn_singlevillage=0x7f050077;
-        public static final int register_name_layout=0x7f050056;
-        public static final int register_nation_layout=0x7f05006f;
-        public static final int register_notice_singlevillage=0x7f05007c;
-        public static final int register_school_layout=0x7f050069;
-        public static final int register_weight_layout=0x7f050066;
-        public static final int rl_bottom=0x7f050008;
-        public static final int rl_layout=0x7f050004;
-        public static final int root=0x7f050012;
+        public static final int company=0x7f050074;
+        public static final int content_001=0x7f05004b;
+        public static final int female=0x7f050063;
+        public static final int finish_register=0x7f05005a;
+        public static final int forget_passwd_text=0x7f05003a;
+        public static final int friend_list_myImg=0x7f05001b;
+        public static final int friend_list_myName=0x7f05001c;
+        public static final int friend_menu_add=0x7f050097;
+        public static final int friend_menu_exit=0x7f050098;
+        public static final int gender=0x7f050060;
+        public static final int headImageViewContainer=0x7f050005;
+        public static final int head_arrowImageView=0x7f050025;
+        public static final int head_contentLayout=0x7f050024;
+        public static final int head_lastUpdatedTextView=0x7f050028;
+        public static final int head_photos=0x7f050047;
+        public static final int head_progressBar=0x7f050026;
+        public static final int head_tipsTextView=0x7f050027;
+        public static final int height=0x7f05006b;
+        public static final int hometown=0x7f050068;
+        public static final int id_faxian=0x7f050092;
+        public static final int id_indicator_one=0x7f050041;
+        public static final int id_indicator_three=0x7f050043;
+        public static final int id_indicator_two=0x7f050042;
+        public static final int id_item=0x7f05002b;
+        public static final int id_liaotian=0x7f050090;
+        public static final int id_qiqiu=0x7f050048;
+        public static final int id_tab_faxian_ly=0x7f050091;
+        public static final int id_tab_liaotian_ly=0x7f05008f;
+        public static final int id_tab_line=0x7f050095;
+        public static final int id_tab_tongxunlu_ly=0x7f050093;
+        public static final int id_tongxunlu=0x7f050094;
+        public static final int imageView1=0x7f05001d;
+        public static final int imageView_item=0x7f050029;
+        public static final int input1=0x7f050032;
+        public static final int input2=0x7f050035;
+        public static final int input_age=0x7f050066;
+        public static final int input_company=0x7f050075;
+        public static final int input_height=0x7f05006c;
+        public static final int input_hometown=0x7f050069;
+        public static final int input_mdn=0x7f050034;
+        public static final int input_mdn_layout=0x7f050080;
+        public static final int input_name=0x7f05005e;
+        public static final int input_nation=0x7f050078;
+        public static final int input_passwd=0x7f050037;
+        public static final int input_shool=0x7f050072;
+        public static final int input_verify=0x7f050088;
+        public static final int input_weight=0x7f05006f;
+        public static final int interest_topic=0x7f050045;
+        public static final int iv_icon=0x7f050016;
+        public static final int iv_userhead=0x7f050011;
+        public static final int layout_nagtivie=0x7f050007;
+        public static final int listview=0x7f05000c;
+        public static final int lllayout=0x7f05008e;
+        public static final int login_btn=0x7f050038;
+        public static final int login_menu_exit=0x7f05009a;
+        public static final int login_menu_setting=0x7f050099;
+        public static final int loginpage=0x7f050030;
+        public static final int ly_main_weixin=0x7f05003b;
+        public static final int main_radio=0x7f05002c;
+        public static final int male=0x7f050062;
+        public static final int mdn=0x7f050033;
+        public static final int meet_layout=0x7f05003c;
+        public static final int meet_view=0x7f05003f;
+        public static final int meet_viewpager=0x7f050040;
+        public static final int msg=0x7f05003d;
+        public static final int name=0x7f050049;
+        public static final int name_item=0x7f05002a;
+        public static final int nation=0x7f050077;
+        public static final int notice_text=0x7f050087;
+        public static final int notice_title=0x7f050084;
+        public static final int notify_imageLog=0x7f05004d;
+        public static final int notify_msg=0x7f05004f;
+        public static final int notify_name=0x7f05004e;
+        public static final int notify_time=0x7f050050;
+        public static final int off=0x7f050004;
+        public static final int on=0x7f050002;
+        public static final int onTouch=0x7f050003;
+        public static final int passwd=0x7f050036;
+        public static final int personal_msg=0x7f05003e;
+        public static final int photo=0x7f05005c;
+        public static final int radio_discovery=0x7f05002f;
+        public static final int radio_hot=0x7f05002e;
+        public static final int radio_recommend=0x7f05002d;
+        public static final int recent_msg=0x7f050056;
+        public static final int recent_name=0x7f050053;
+        public static final int recent_new_num=0x7f050057;
+        public static final int recent_time=0x7f050054;
+        public static final int recent_userhead=0x7f050052;
+        public static final int reg_back_btn=0x7f05007b;
+        public static final int reg_phone_num=0x7f05007c;
+        public static final int regist_text=0x7f050039;
+        public static final int register_age_layout=0x7f050064;
+        public static final int register_btn=0x7f05007d;
+        public static final int register_company_layout=0x7f050073;
+        public static final int register_finish_btn=0x7f05007a;
+        public static final int register_finish_layout=0x7f050079;
+        public static final int register_gender_layout=0x7f05005f;
+        public static final int register_height_layout=0x7f05006a;
+        public static final int register_hometown_layout=0x7f050067;
+        public static final int register_information_singlevillage=0x7f05005b;
+        public static final int register_mdn_singlevillage=0x7f05007e;
+        public static final int register_name_layout=0x7f05005d;
+        public static final int register_nation_layout=0x7f050076;
+        public static final int register_notice_singlevillage=0x7f050083;
+        public static final int register_school_layout=0x7f050070;
+        public static final int register_weight_layout=0x7f05006d;
+        public static final int rl_bottom=0x7f05000d;
+        public static final int rl_layout=0x7f050009;
+        public static final int root=0x7f050019;
         public static final int round=0x7f050001;
-        public static final int sampleView1=0x7f05008f;
-        public static final int school=0x7f05006a;
-        public static final int select_gender=0x7f05005a;
-        public static final int setting_ip=0x7f050083;
-        public static final int setting_port=0x7f050084;
-        public static final int tab1=0x7f050017;
-        public static final int tab1_listView=0x7f05004a;
-        public static final int tab2=0x7f050018;
-        public static final int tab2_bg=0x7f05001a;
-        public static final int tab2_listView=0x7f050085;
-        public static final int tab3=0x7f050019;
-        public static final int tab3_listView=0x7f050086;
-        public static final int textView2=0x7f05003d;
-        public static final int tips=0x7f05003f;
-        public static final int title=0x7f05002a;
-        public static final int tubiao=0x7f050045;
-        public static final int tvLoad=0x7f050011;
-        public static final int tv_chatcontent=0x7f05000d;
-        public static final int tv_name=0x7f050010;
-        public static final int tv_sendtime=0x7f05000b;
-        public static final int tv_username=0x7f05000e;
-        public static final int upload_head_portiait=0x7f050052;
-        public static final int user_head_portiait=0x7f050051;
-        public static final int verify=0x7f050078;
-        public static final int verify_btn=0x7f05007b;
-        public static final int verify_layout=0x7f05007a;
-        public static final int viewPager=0x7f05001c;
-        public static final int weight=0x7f050067;
-        public static final int weixin_code=0x7f05007f;
-        public static final int weixin_num=0x7f05007e;
+        public static final int sampleView1=0x7f050096;
+        public static final int school=0x7f050071;
+        public static final int select_gender=0x7f050061;
+        public static final int settingButton=0x7f050006;
+        public static final int setting_ip=0x7f05008a;
+        public static final int setting_port=0x7f05008b;
+        public static final int tab1=0x7f05001e;
+        public static final int tab1_listView=0x7f050051;
+        public static final int tab2=0x7f05001f;
+        public static final int tab2_bg=0x7f050021;
+        public static final int tab2_listView=0x7f05008c;
+        public static final int tab3=0x7f050020;
+        public static final int tab3_listView=0x7f05008d;
+        public static final int textView2=0x7f050044;
+        public static final int tips=0x7f050046;
+        public static final int title=0x7f050031;
+        public static final int tubiao=0x7f05004c;
+        public static final int tvLoad=0x7f050018;
+        public static final int tv_chatcontent=0x7f050012;
+        public static final int tv_name=0x7f050017;
+        public static final int tv_sendtime=0x7f050010;
+        public static final int tv_username=0x7f050013;
+        public static final int upload_head_portiait=0x7f050059;
+        public static final int user_head_portiait=0x7f050058;
+        public static final int verify=0x7f05007f;
+        public static final int verify_btn=0x7f050082;
+        public static final int verify_layout=0x7f050081;
+        public static final int viewPager=0x7f050023;
+        public static final int weight=0x7f05006e;
+        public static final int weixin_code=0x7f050086;
+        public static final int weixin_num=0x7f050085;
     }
     public static final class layout {
-        public static final int activity_home=0x7f030000;
-        public static final int chat=0x7f030001;
-        public static final int chatting_item_msg_text_left=0x7f030002;
-        public static final int chatting_item_msg_text_right=0x7f030003;
-        public static final int crop_selector=0x7f030004;
-        public static final int dialog_layout=0x7f030005;
-        public static final int friend_list=0x7f030006;
-        public static final int head=0x7f030007;
-        public static final int item=0x7f030008;
-        public static final int layout_toolbar=0x7f030009;
-        public static final int loginpage=0x7f03000a;
-        public static final int main=0x7f03000b;
-        public static final int me_tab=0x7f03000c;
-        public static final int meet_layout=0x7f03000d;
-        public static final int meet_layout2=0x7f03000e;
-        public static final int meet_multi_one_fragment_view=0x7f03000f;
-        public static final int meet_one_multi_fragment_view=0x7f030010;
-        public static final int meet_one_multi_head_photo_item=0x7f030011;
-        public static final int meet_start_fragment_view=0x7f030012;
-        public static final int meet_tab=0x7f030013;
-        public static final int meet_unstart_fragment_view=0x7f030014;
-        public static final int member_listview=0x7f030015;
-        public static final int notify_view=0x7f030016;
-        public static final int personal_msg_tab=0x7f030017;
-        public static final int recent_chat_item=0x7f030018;
-        public static final int register_information_setting=0x7f030019;
-        public static final int register_information_singlevillage=0x7f03001a;
-        public static final int register_input_auth_code=0x7f03001b;
-        public static final int register_input_phone_num=0x7f03001c;
-        public static final int register_mdn_singlevillage=0x7f03001d;
-        public static final int register_notice_singlevillage=0x7f03001e;
-        public static final int register_verify_singlevillage=0x7f03001f;
-        public static final int setting_view=0x7f030020;
-        public static final int tab1=0x7f030021;
-        public static final int tab2=0x7f030022;
-        public static final int tab3=0x7f030023;
-        public static final int top2=0x7f030024;
-        public static final int vertical_scroll_textview=0x7f030025;
+        public static final int activity_head_photo_setting=0x7f030000;
+        public static final int activity_home=0x7f030001;
+        public static final int chat=0x7f030002;
+        public static final int chatting_item_msg_text_left=0x7f030003;
+        public static final int chatting_item_msg_text_right=0x7f030004;
+        public static final int crop_image_view=0x7f030005;
+        public static final int crop_selector=0x7f030006;
+        public static final int dialog_layout=0x7f030007;
+        public static final int friend_list=0x7f030008;
+        public static final int head=0x7f030009;
+        public static final int item=0x7f03000a;
+        public static final int layout_toolbar=0x7f03000b;
+        public static final int loginpage=0x7f03000c;
+        public static final int main=0x7f03000d;
+        public static final int me_tab=0x7f03000e;
+        public static final int meet_layout=0x7f03000f;
+        public static final int meet_layout2=0x7f030010;
+        public static final int meet_multi_one_fragment_view=0x7f030011;
+        public static final int meet_one_multi_fragment_view=0x7f030012;
+        public static final int meet_one_multi_head_photo_item=0x7f030013;
+        public static final int meet_start_fragment_view=0x7f030014;
+        public static final int meet_tab=0x7f030015;
+        public static final int meet_unstart_fragment_view=0x7f030016;
+        public static final int member_listview=0x7f030017;
+        public static final int notify_view=0x7f030018;
+        public static final int personal_msg_tab=0x7f030019;
+        public static final int recent_chat_item=0x7f03001a;
+        public static final int register_information_setting=0x7f03001b;
+        public static final int register_information_singlevillage=0x7f03001c;
+        public static final int register_input_auth_code=0x7f03001d;
+        public static final int register_input_phone_num=0x7f03001e;
+        public static final int register_mdn_singlevillage=0x7f03001f;
+        public static final int register_notice_singlevillage=0x7f030020;
+        public static final int register_verify_singlevillage=0x7f030021;
+        public static final int setting_view=0x7f030022;
+        public static final int tab1=0x7f030023;
+        public static final int tab2=0x7f030024;
+        public static final int tab3=0x7f030025;
+        public static final int top2=0x7f030026;
+        public static final int vertical_scroll_textview=0x7f030027;
     }
     public static final class menu {
         public static final int friend_list=0x7f090000;
@@ -2248,6 +2300,98 @@ containing a value of this type.
           @attr name com.singlevillage.meet.activity:text_size
         */
         public static final int ChangeColorIconView_text_size = 3;
+        /** Attributes that can be used with a CropImageView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #CropImageView_aspectRatioX com.singlevillage.meet.activity:aspectRatioX}</code></td><td></td></tr>
+           <tr><td><code>{@link #CropImageView_aspectRatioY com.singlevillage.meet.activity:aspectRatioY}</code></td><td></td></tr>
+           <tr><td><code>{@link #CropImageView_fixAspectRatio com.singlevillage.meet.activity:fixAspectRatio}</code></td><td></td></tr>
+           <tr><td><code>{@link #CropImageView_guidelines com.singlevillage.meet.activity:guidelines}</code></td><td></td></tr>
+           <tr><td><code>{@link #CropImageView_imageResource com.singlevillage.meet.activity:imageResource}</code></td><td></td></tr>
+           </table>
+           @see #CropImageView_aspectRatioX
+           @see #CropImageView_aspectRatioY
+           @see #CropImageView_fixAspectRatio
+           @see #CropImageView_guidelines
+           @see #CropImageView_imageResource
+         */
+        public static final int[] CropImageView = {
+            0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009,
+            0x7f01000a
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.singlevillage.meet.activity.R.attr#aspectRatioX}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.singlevillage.meet.activity:aspectRatioX
+        */
+        public static final int CropImageView_aspectRatioX = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.singlevillage.meet.activity.R.attr#aspectRatioY}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.singlevillage.meet.activity:aspectRatioY
+        */
+        public static final int CropImageView_aspectRatioY = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.singlevillage.meet.activity.R.attr#fixAspectRatio}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.singlevillage.meet.activity:fixAspectRatio
+        */
+        public static final int CropImageView_fixAspectRatio = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.singlevillage.meet.activity.R.attr#guidelines}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>on</code></td><td>2</td><td></td></tr>
+<tr><td><code>onTouch</code></td><td>1</td><td></td></tr>
+<tr><td><code>off</code></td><td>0</td><td></td></tr>
+</table>
+          @attr name com.singlevillage.meet.activity:guidelines
+        */
+        public static final int CropImageView_guidelines = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.singlevillage.meet.activity.R.attr#imageResource}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.singlevillage.meet.activity:imageResource
+        */
+        public static final int CropImageView_imageResource = 4;
         /** Attributes that can be used with a RoundImageView.
            <p>Includes the following attributes:</p>
            <table>

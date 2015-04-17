@@ -34,10 +34,7 @@
             android:name="com.singlevillage.meet.activity.RegisterActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateVisible" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <service android:name="com.singlevillage.meet.service.GetMsgService" >
@@ -97,6 +94,16 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateVisible" >
         </activity>
+        <activity
+            android:name="com.singlevillage.meet.activity.HeadPhotoSettingActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateVisible" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
     </application>
 
 </manifest>

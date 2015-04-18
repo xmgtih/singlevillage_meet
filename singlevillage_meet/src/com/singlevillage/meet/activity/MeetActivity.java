@@ -1,73 +1,109 @@
 package com.singlevillage.meet.activity;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.json.JSONObject;
+
 import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.singlevillage.meet.common.tran.bean.TranObject;
 import com.singlevillage.meet.fragment.MeetStartFragment;
 import com.singlevillage.meet.fragment.MeetUnstartFragment;
+import com.singlevillage.meet.util.DialogFactory;
+import com.singlevillage.meet.util.HttpUtils;
+import com.singlevillage.meet.util.Utils;
 
 public class MeetActivity extends MyActivity {
 	
+	private final static int UNSTART = 1;
+	private final static int START = 2;
+	
+	private Date mRemainingData;
 	private TextView  mMsgTextView;
 	private TextView  mPersonalMsgTextView;
+	private RelativeLayout  mUnStartContain;
+	private RelativeLayout  mStartContain;
+    private DateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    private String  mRemainingTime ;
+    private String  mStartTime;
+    private String  mEndTime;
 	private static int mStatus = 0;
+	TextView mRemainningTimeView;
+	private MyCount  mMyCount = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{//TODO 从上一个activity中取得当前的状态来加载meet具体fragment
-		setContentView(R.layout.meet_layout);
-		mMsgTextView = (TextView)findViewById(R.id.msg);
-		mPersonalMsgTextView = (TextView)findViewById(R.id.personal_msg);
-        // Create an instance of ExampleFragment
-		MeetUnstartFragment firstFragment = new MeetUnstartFragment();
-
-        // In case this activity was started with special instructions from an Intent,
-        // pass the Intent's extras to the fragment as arguments
-        firstFragment.setArguments(getIntent().getExtras());
-
-        // Add the fragment to the 'fragment_container' FrameLayout
-        getFragmentManager().beginTransaction()
-                .add(R.id.meet_view, firstFragment).commit();
-        DownloadTask  downloadTask = new DownloadTask();
-        downloadTask.execute();
 		super.onCreate(savedInstanceState);
-//        getMessage(null);
+		setContentView(R.layout.meet_layout);
+		initView();
+//		getMeetStatus();TODO  有网的时候打开
 
+		
+		updateView(UNSTART);
 	}
 	
-	private void updateFragment(int status)
+	private void initView(){
+		mMsgTextView = (TextView)findViewById(R.id.msg);
+		mPersonalMsgTextView = (TextView)findViewById(R.id.personal_msg);
+		mUnStartContain = (RelativeLayout)findViewById(R.id.unStart_contain);
+		mStartContain = (RelativeLayout)findViewById(R.id.start_contain);
+		
+		return ;
+	}
+	
+	private void updateView(int status)
 	{//TODO 通过getMessage获取后台状态来更新fragment
-		if(0 == mStatus)
+		if(UNSTART == status)
 		{
-			mStatus = 1;
-			 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-			 MeetStartFragment newFragment = new MeetStartFragment();
-	         // Replace whatever is in the fragment_container view with this fragment,
-	         // and add the transaction to the back stack so the user can navigate back
-	         transaction.replace(R.id.meet_view, newFragment);
-	         transaction.addToBackStack(null);
-
-	         // Commit the transaction
-	         transaction.commit();			
+			mStatus = UNSTART;
+			 mUnStartContain.setVisibility(View.VISIBLE);
+			 mStartContain.setVisibility(View.GONE);
+			 TextView beginTimeView = (TextView)findViewById(R.id.beginTime);
+//			 beginTimeView.setText(mStartTime+"开始");
+			 beginTimeView.setText("09:32:33"+"开始");
+			 mRemainningTimeView = (TextView)findViewById(R.id.remainingTime);
+			 mRemainingTime="09:32:33";
+//			 remainningTimeView.setText(mRemainingTime);
+			 mRemainningTimeView.setText("09:32:33");
+			 try {
+				 mRemainingData = sdf.parse(mRemainingTime);
+				 long remainSecondes = mRemainingData.getTime();
+				 Date baseTime = sdf.parse("00:00:00");
+				 long baseSeconds = baseTime.getTime();
+				 if(null != mMyCount)
+				 {
+					 mMyCount.cancel();
+					 mMyCount = null;
+				 }
+				 mMyCount = new MyCount(remainSecondes - baseSeconds, 1000);
+				 
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 	
 		}
 		else
 		{
-			mStatus = 0;
-			 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-			 MeetUnstartFragment newFragment = new MeetUnstartFragment();
-	         // Replace whatever is in the fragment_container view with this fragment,
-	         // and add the transaction to the back stack so the user can navigate back
-	         transaction.replace(R.id.meet_view, newFragment);
-	         transaction.addToBackStack(null);
-
-	         // Commit the transaction
-	         transaction.commit();	
+			 mStatus = UNSTART;
+			 mUnStartContain.setVisibility(View.GONE);
+			 mStartContain.setVisibility(View.VISIBLE);
 			
 		}
-        DownloadTask  downloadTask = new DownloadTask();
-        downloadTask.execute();
 
 		
 	}
@@ -78,44 +114,76 @@ public class MeetActivity extends MyActivity {
 
 	}
 	
-	class DownloadTask extends AsyncTask<Integer, Integer, String> {
-		// 后面尖括号内分别是参数（例子里是线程休息时间），进度(publishProgress用到)，返回值 类型
+	
+	private void getMeetStatus()
+	{
+		String requestUrl = HttpUtils.MEET_STATUS;
+		JsonObjectRequest jsonRequest = new JsonObjectRequest(
+				Method.GET, requestUrl, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						Log.i(Utils.TAG,response.toString());
+						int retCode = response.optInt("code");
+						if (0 == retCode) {//ok
+							JSONObject  data = response.optJSONObject("data");
+							String status = data.optString("status");
+							if("open".equalsIgnoreCase(status)){//start
+								
+								updateView(UNSTART);
 
-		@Override
-		protected void onPreExecute() {
-			// 第一个执行方法
-			super.onPreExecute();
+							}
+							else if("close".equalsIgnoreCase(status)){//unstart
+								mRemainingTime = data.optString("remaining");
+								mStartTime = data.optString("start_time");
+								updateView(START);
+							}
+						}else{//error
+							DialogFactory.ToastDialog(MeetActivity.this,
+									"单身村", "服务器出现异常");
+					  }
+
+					}
+
+				}, new Response.ErrorListener() {
+
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						
+						DialogFactory.ToastDialog(MeetActivity.this,
+								"单身村", "网络有问题");
+					}
+				});
+
+		HttpUtils.sendJsonRequest(jsonRequest);
+	}
+	
+	
+	/* 定义一个倒计时的内部类 */
+	class MyCount extends CountDownTimer {
+		private long mMillisInFuture;
+		
+		public MyCount(long millisInFuture, long countDownInterval) {
+			super(millisInFuture, countDownInterval);
+			mMillisInFuture = millisInFuture; 
 		}
 
 		@Override
-		protected String doInBackground(Integer... params) {
-			int i = 1;
+		public void onFinish() {
+			getMeetStatus();
+		}
 
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		@Override
+		public void onTick(long millisUntilFinished) {
+			if(millisUntilFinished <= mMillisInFuture/2)
+			{
+				getMeetStatus();//TODO 重新获取
 			}
-			return "执行完毕";
+		
+		    mRemainingData.setTime(millisUntilFinished);
+		    mRemainningTimeView.setText(sdf.format(mRemainingData));
 		}
-
-		@Override
-		protected void onProgressUpdate(Integer... progress) {
-			// 这个函数在doInBackground调用publishProgress时触发，虽然调用时只有一个参数
-			// 但是这里取到的是一个数组,所以要用progesss[0]来取值
-			// 第n个参数就用progress[n]来取值
-			super.onProgressUpdate(progress);
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-			// doInBackground返回时触发，换句话说，就是doInBackground执行完后触发
-			// 这里的result就是上面doInBackground执行后的返回值，所以这里是"执行完毕"
-			updateFragment(0);
-			super.onPostExecute(result);
-		}
-
-	}  
+	} 
+	
 
 }

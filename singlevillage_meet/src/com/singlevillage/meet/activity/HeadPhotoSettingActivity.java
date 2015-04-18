@@ -120,6 +120,8 @@ public class HeadPhotoSettingActivity extends MyActivity {
 
 				Bitmap headPhotoBitMap = mHeadImageView.getCroppedImage();
 				Utils.saveHeadPhoto(headPhotoBitMap);
+				Intent intent = new Intent(HeadPhotoSettingActivity.this, MeetActivity.class);
+				startActivity(intent);
 			}
 		});
 		

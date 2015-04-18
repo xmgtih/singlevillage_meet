@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/article"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="meet_unstart_fragment"
-    android:padding="16dp"
-    android:textSize="18sp" />
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/beginTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:paddingTop="30dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/beginTime"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:paddingTop="10dp"
+        android:text="活动开始倒计时"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/remainingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tips"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:paddingTop="10dp"
+        android:textSize="28sp" />
+    
+
+</RelativeLayout>

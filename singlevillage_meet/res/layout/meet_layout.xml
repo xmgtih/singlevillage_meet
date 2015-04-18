@@ -1,43 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/meet_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/meet_layout"
     android:orientation="vertical" >
 
-    <RelativeLayout 
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:orientation="horizontal"
-        android:layout_weight="1" >
+        android:layout_height="50dp"
+        android:background="@color/green_03"
+        android:orientation="horizontal" >
 
-        <TextView 
+        <TextView
             android:id="@+id/msg"
-            android:text="消息"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:textSize="20.0sp"
-             />
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:text="消息"
+            android:textSize="20.0sp" />
 
         <TextView
             android:id="@+id/personal_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textSize="20.0sp"
-            android:text="个人信息" 
-            />
-
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:paddingRight="15dp"
+            android:text="个人信息"
+            android:textSize="20.0sp" />
     </RelativeLayout>
-    
-    <FrameLayout 
+
+    <FrameLayout
         android:id="@+id/meet_view"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="3"
-        >
-        
+        android:layout_height="match_parent"
+        android:background="@color/green_02"
+         >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:id="@+id/unStart_contain"
+             >
+
+            <TextView
+                android:id="@+id/beginTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:paddingTop="30dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/beginTime"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="10dp"
+                android:text="活动开始倒计时"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/remainingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tips"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="10dp"
+                android:textSize="28sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:id="@+id/start_contain"
+             >
+
+		</RelativeLayout>         
         
     </FrameLayout>
 

@@ -4,58 +4,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <FrameLayout
+    <FrameLayout 
         android:id="@+id/headImageViewContainer"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="top|center"
-        android:layout_marginTop="30dp" >
-
+        >
+    <!--     
+    <com.edmodo.cropper.CropImageView
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/headImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center|top"
+        android:visibility="visible"
+        android:contentDescription="NPYSAB"
+         />    
+         -->
     </FrameLayout>
+    
 
-    <FrameLayout
-        android:id="@+id/headImageSettingBar"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="30dp" >
-
-        <Button
-            android:id="@+id/setHeadPhotoButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:text="设置头像"
-            android:textSize="20sp"
-            />
-
-        <LinearLayout
-            android:id="@+id/headResetFinish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone" >
-
-            <Button
-                android:id="@+id/resetHeadPhotoButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:text="重新设置"
-                android:textSize="20sp"
-                 />
-
-            <Button
-                android:id="@+id/finshiHeadPhotoButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:text="完成"
-                android:textSize="20sp"
-                />
-        </LinearLayout>
-    </FrameLayout>
+    <Button
+        android:id="@+id/settingButton"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_vertical"
+        android:text="设置头像"
+        android:visibility="gone"
+        android:textSize="20sp" />
 
 </LinearLayout>

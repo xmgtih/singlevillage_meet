@@ -1,9 +1,6 @@
 package com.singlevillage.meet.activity;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -19,27 +16,17 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.edmodo.cropper.CropImageView;
-import com.singlevillage.meet.activity.R.id;
 import com.singlevillage.meet.common.tran.bean.TranObject;
-import com.singlevillage.meet.util.FileSystem;
-import com.singlevillage.meet.util.IOUtil;
-import com.singlevillage.meet.util.Utils;
 
 public class HeadPhotoSettingActivity extends MyActivity {
 	
 	
 	private final int   PICK_FROM_FILE = 1;
 	private CropImageView mHeadImageView;
-	private Button    msetButton;
-	private Button    mReSetButton;
-	private Button    mFinishButton;
-
+	private Button    mbutton;
 	private FrameLayout headImageViewContainer;
-	private LinearLayout mHeadImageResetFinish;
 	@Override
 	protected void onCreate(Bundle arg0) {
 
@@ -51,8 +38,30 @@ public class HeadPhotoSettingActivity extends MyActivity {
 	}
 	public void initView(){
 		headImageViewContainer = (FrameLayout)findViewById(R.id.headImageViewContainer);
-		msetButton = (Button)findViewById(R.id.setHeadPhotoButton);
-		msetButton.setOnClickListener(new OnClickListener() {
+//		mHeadImageView = (CropImageView)findViewById(R.id.headImageView);
+//		mHeadImageView.setImageResource(R.drawable.butterfly);
+//		mHeadImageView.setImageBitmap(imageBitMap);
+//		mHeadImageView.setAspectRatio(1, 1);//设置比例为一比一
+//		mHeadImageView.setFixedAspectRatio(true);//设置允许按比例截图，如果不设置就是默认的任意大小截图
+//		mHeadImageView = (CropImageView)findViewById(R.id.headImageView);
+//		mHeadImageView.setImageResource(R.drawable.butterfly);
+//		mHeadImageView.setAspectRatio(1, 1);//设置比例为一比一
+//		mHeadImageView.setFixedAspectRatio(true);//设置允许按比例截图，如果不设置就是默认的任意大小截图
+		
+//		mHeadImageView.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//
+//				Intent  openPicsIntent = new Intent(Intent.ACTION_PICK,  
+//		                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//				openPicsIntent.setType("image/*");
+//				startActivityForResult(openPicsIntent, PICK_FROM_FILE);
+//			}
+//		});
+		mbutton = (Button)findViewById(R.id.settingButton);
+		mbutton.setVisibility(View.VISIBLE);
+		mbutton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -76,7 +85,18 @@ public class HeadPhotoSettingActivity extends MyActivity {
 		switch (requestCode) {
 		case PICK_FROM_FILE:
 		{
-           processUnCroppedPic(data);
+//			mUnCroppedImageView.setVisibility(View.GONE);
+//			mHeadImageView.setVisibility(View.VISIBLE);
+//			mbutton.setVisibility(View.VISIBLE);
+			Uri  imageUri = data.getData();
+			Bitmap  imageBitMap = decodeUriAsBitmap(imageUri);
+			mHeadImageView = new CropImageView(HeadPhotoSettingActivity.this);//(CropImageView)findViewById(R.id.headImageView);
+//			mHeadImageView.setImageResource(R.drawable.butterfly);
+			
+			mHeadImageView.setImageBitmap(imageBitMap);
+			mHeadImageView.setAspectRatio(1, 1);//设置比例为一比一
+			mHeadImageView.setFixedAspectRatio(true);//设置允许按比例截图，如果不设置就是默认的任意大小截图
+			headImageViewContainer.addView(mHeadImageView);
 		}
 			break;
 
@@ -85,45 +105,6 @@ public class HeadPhotoSettingActivity extends MyActivity {
 		}
 		
 	}
-	
-    private void   processUnCroppedPic(Intent data)
-    {
-		Uri  imageUri = data.getData();
-		Bitmap  imageBitMap = decodeUriAsBitmap(imageUri);
-		
-		mHeadImageView = new CropImageView(HeadPhotoSettingActivity.this);//(CropImageView)findViewById(R.id.headImageView);
-		mHeadImageView.setImageBitmap(imageBitMap);
-		mHeadImageView.setAspectRatio(1, 1);//设置比例为一比一
-		mHeadImageView.setFixedAspectRatio(true);//设置允许按比例截图，如果不设置就是默认的任意大小截图
-		headImageViewContainer.addView(mHeadImageView);
-		
-		msetButton.setVisibility(View.GONE);
-		mHeadImageResetFinish = (LinearLayout)findViewById(R.id.headResetFinish);
-		mHeadImageResetFinish.setVisibility(View.VISIBLE);
-		mReSetButton = (Button)findViewById(R.id.resetHeadPhotoButton);
-		mReSetButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-
-				Intent  openPicsIntent = new Intent(Intent.ACTION_PICK,  
-		                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-				openPicsIntent.setType("image/*");
-				startActivityForResult(openPicsIntent, PICK_FROM_FILE);
-			}
-		});
-		mFinishButton = (Button)findViewById(R.id.finshiHeadPhotoButton);
-		mFinishButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-
-				Bitmap headPhotoBitMap = mHeadImageView.getCroppedImage();
-				Utils.saveHeadPhoto(headPhotoBitMap);
-			}
-		});
-		
-    }
 	
     private Bitmap decodeUriAsBitmap(Uri uri) {
         Bitmap bitmap = null;
@@ -137,8 +118,6 @@ public class HeadPhotoSettingActivity extends MyActivity {
         return bitmap;
     }
     
-    
-
     public  Bitmap decodeSampledBitmapFromResource(Uri uri,
             int reqWidth, int reqHeight) throws FileNotFoundException {
     	Log.i(MyApplication.TAG, "decodeSampledBitmapFromResource, reqwidth"+ reqWidth +", reqHeight"+ reqHeight);
@@ -171,7 +150,6 @@ public class HeadPhotoSettingActivity extends MyActivity {
     	Log.i(MyApplication.TAG, "calculateInSampleSize, inSampleSize"+ inSampleSize);
     	return inSampleSize;
     }
-    
 	
 	@Override
 	public void getMessage(TranObject msg) {

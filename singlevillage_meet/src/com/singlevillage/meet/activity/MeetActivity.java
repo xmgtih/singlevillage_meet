@@ -66,7 +66,7 @@ public class MeetActivity extends MyActivity {
 	}
 	
 	private void updateView(int status)
-	{//TODO 通过getMessage获取后台状态来更新fragment
+	{
 		if(UNSTART == status)
 		{
 			mStatus = UNSTART;

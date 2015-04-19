@@ -83,12 +83,15 @@ public class RegisterVerifyActivity extends MyActivity {
 
 		
 	private void goRegister(){
-		Intent intent = new Intent(RegisterVerifyActivity.this, RegisterActivity.class);
+		Intent intent = new Intent(RegisterVerifyActivity.this, HeadPhotoSettingActivity.class);
 		startActivity(intent);
 	}
 	private void goNotice(){
-		Intent intent = new Intent(RegisterVerifyActivity.this, RegisterNoticeActivity.class);
+		Intent intent = new Intent(RegisterVerifyActivity.this, HeadPhotoSettingActivity.class);
 		startActivity(intent);
+		//TODO调试用
+//		Intent intent = new Intent(RegisterVerifyActivity.this, RegisterNoticeActivity.class);
+//		startActivity(intent);
 	}
 
 	@Override

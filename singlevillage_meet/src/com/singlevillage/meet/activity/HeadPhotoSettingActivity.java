@@ -27,6 +27,7 @@ import com.singlevillage.meet.activity.R.id;
 import com.singlevillage.meet.common.tran.bean.TranObject;
 import com.singlevillage.meet.util.FileSystem;
 import com.singlevillage.meet.util.IOUtil;
+import com.singlevillage.meet.util.ThreadUtils;
 import com.singlevillage.meet.util.Utils;
 
 public class HeadPhotoSettingActivity extends MyActivity {
@@ -100,6 +101,7 @@ public class HeadPhotoSettingActivity extends MyActivity {
 		msetButton.setVisibility(View.GONE);
 		mHeadImageResetFinish = (LinearLayout)findViewById(R.id.headResetFinish);
 		mHeadImageResetFinish.setVisibility(View.VISIBLE);
+		//重新选图
 		mReSetButton = (Button)findViewById(R.id.resetHeadPhotoButton);
 		mReSetButton.setOnClickListener(new OnClickListener() {
 			
@@ -112,15 +114,22 @@ public class HeadPhotoSettingActivity extends MyActivity {
 				startActivityForResult(openPicsIntent, PICK_FROM_FILE);
 			}
 		});
+		//完成设置 进入注册信息
 		mFinishButton = (Button)findViewById(R.id.finshiHeadPhotoButton);
 		mFinishButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 
-				Bitmap headPhotoBitMap = mHeadImageView.getCroppedImage();
-				Utils.saveHeadPhoto(headPhotoBitMap);
-				Intent intent = new Intent(HeadPhotoSettingActivity.this, MeetActivity.class);
+				final Bitmap headPhotoBitMap = mHeadImageView.getCroppedImage();
+				ThreadUtils.THREAD_POOL_EXECUTOR.execute(new Runnable() {
+					@Override
+					public void run() {
+						Utils.saveHeadPhoto(headPhotoBitMap);		
+					}
+				});
+				
+				Intent intent = new Intent(HeadPhotoSettingActivity.this, RegisterActivity.class);
 				startActivity(intent);
 			}
 		});

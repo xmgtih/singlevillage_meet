@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.os.StrictMode;
+import android.text.TextUtils;
 import android.view.WindowManager;
 
 import com.singlevillage.meet.common.util.Constants;
@@ -47,16 +48,32 @@ public class WelcomeActivity extends Activity {
 
 	public void initView() {
 		if (util.getIsStart()) {// 如果正在后台运行
-			goFriendListActivity();
+			goMeetActivity();
 		} else {// 如果是首次运行
-			mHandler = new Handler();
-			mHandler.postDelayed(new Runnable() {
+			if(TextUtils.isEmpty(util.getToken()))
+			{//从没有登录过
+				mHandler = new Handler();
+				mHandler.postDelayed(new Runnable() {
 
-				public void run() {
-					// TODO Auto-generated method stub
-					goLoginActivity();
-				}
-			}, 1000);
+					public void run() {
+						// TODO Auto-generated method stub
+						goLoginActivity();
+					}
+				}, 1000);				
+			}
+			else
+			{//登陆过
+				mHandler = new Handler();
+				mHandler.postDelayed(new Runnable() {
+
+					public void run() {
+						// TODO Auto-generated method stub
+						goMeetActivity();
+					}
+				}, 1000);
+				
+			}
+
 		}
 	}
 
@@ -73,8 +90,8 @@ public class WelcomeActivity extends Activity {
 	/**
 	 * 进入好友列表界面
 	 */
-	public void goFriendListActivity() {
-		Intent i = new Intent(this, FriendListActivity.class);
+	public void goMeetActivity() {
+		Intent i = new Intent(this, MeetActivity.class);
 		startActivity(i);
 		util.setIsStart(false);
 		finish();

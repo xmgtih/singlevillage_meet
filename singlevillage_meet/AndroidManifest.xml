@@ -22,6 +22,10 @@
         <activity
             android:name="com.singlevillage.meet.activity.WelcomeActivity"
             android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         
         <activity
@@ -70,10 +74,7 @@
         <activity
             android:name="com.singlevillage.meet.activity.MeetActivity"
             android:theme="@android:style/Theme.NoTitleBar">
-			<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name="com.singlevillage.meet.activity.MeetMsgActivity"

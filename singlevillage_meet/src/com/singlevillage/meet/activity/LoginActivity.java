@@ -83,8 +83,7 @@ public class LoginActivity extends MyActivity implements OnClickListener {
 	protected void onResume() {// 在onResume方法里面先判断网络是否可用，再启动服务,这样在打开网络连接之后返回当前Activity时，会重新启动服务联网，
 		super.onResume();
 		if (isNetworkAvailable()) {
-			Intent service = new Intent(this, GetMsgService.class);
-			startService(service);
+			
 		} else {
 			toast(this);
 		}

@@ -47,12 +47,14 @@ import com.singlevillage.meet.client.ClientOutputThread;
 import com.singlevillage.meet.common.bean.User;
 import com.singlevillage.meet.common.tran.bean.TranObject;
 import com.singlevillage.meet.common.tran.bean.TranObjectType;
+import com.singlevillage.meet.common.util.Constants;
 import com.singlevillage.meet.util.DialogFactory;
 import com.singlevillage.meet.util.Encode;
 import com.singlevillage.meet.util.ErrorCodeHelper;
 import com.singlevillage.meet.util.FileSystem;
 import com.singlevillage.meet.util.HttpUtils;
 import com.singlevillage.meet.util.IOUtil;
+import com.singlevillage.meet.util.SharePreferenceUtil;
 import com.singlevillage.meet.util.Utils;
 
 public class RegisterActivity extends MyActivity implements OnClickListener {
@@ -80,8 +82,8 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 	private String mSchool;
 	private String mCompany;
 	private Button mRegFinishButton;
-	private Uri mImgeUri;
-	private Uri mCropImageUri;
+	private SharePreferenceUtil mSharePreferenceUtil;
+
     public static final String CROP_CACHE_FILE_NAME = "crop_cache_file.jpg";
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +94,7 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 //		File cropFile = FileSystem.getInternalFile(this, "crop", "temp.jpeg");
 //		IOUtil.createFile(cropFile);
 //		mCropImageUri = Uri.parse(cropFile.getAbsolutePath());
-		mCropImageUri = Uri
-        .fromFile(Environment.getExternalStorageDirectory())
-        .buildUpon()
-        .appendPath(CROP_CACHE_FILE_NAME)
-        .build();
+		mSharePreferenceUtil = new SharePreferenceUtil(this, Constants.SAVE_USER);
 		initView();
 		
 
@@ -181,17 +179,24 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 									Log.i(Utils.TAG,response.toString());
 									int retCode = response.optInt("code");
 									if (ErrorCodeHelper.code.CODE_SUCCESS == retCode) {//ok
-										//TODO 跳到登录
+										
 										DialogFactory.ToastDialog(RegisterActivity.this, "单身村注册",
 												"注册成功，回登录界面登录试试吧");
 										if (mDialog.isShowing())
 											mDialog.dismiss();
 										
-									}else{//
-										DialogFactory.ToastDialog(RegisterActivity.this, "单身村注册",
-												"服务器异常");
-										if (mDialog.isShowing())
-											mDialog.dismiss();
+									}else{//TODO 待详细处理错误问题原因
+
+//										DialogFactory.ToastDialog(RegisterActivity.this, "单身村注册",
+//												"注册成功，回登录界面登录试试吧");
+//										if (mDialog.isShowing())
+//											mDialog.dismiss();
+//								        goLoginActivity();
+
+//										DialogFactory.ToastDialog(RegisterActivity.this, "单身村注册",
+//												"服务器异常");
+//										if (mDialog.isShowing())
+//											mDialog.dismiss();
 									}
 
 								}
@@ -235,186 +240,18 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		
-		if(RESULT_OK != resultCode){
-			return ;
-		}
-		
-	    if (resultCode != RESULT_OK) {  
-            return;  
-        }  
-        switch (requestCode) {  
-        case PICK_FROM_CAMERA:  
-            doCrop2();  
-            break;  
-        case PICK_FROM_FILE:  
-            mImgeUri = data.getData();  
-            doCrop2();  
-            break;  
-        case CROP_FROM_CAMERA:  
-            if (null != mCropImageUri) {  
-//                setCropImg(data);  
-            	Bitmap  bitmap = decodeUriAsBitmap(mCropImageUri);
-            	 mPhotoView.setImageBitmap(bitmap);  
-                 saveBitmap(Environment.getExternalStorageDirectory() + "/crop_"  
-                         + System.currentTimeMillis() + ".jpeg", bitmap);  
-            }  
-            break;  
-        }
-		
+
 	}
 	
-	private void setCropImg(Intent picdata) {  
-        Bundle bundle = picdata.getExtras();  
-        if (null != bundle) {  
-            Bitmap mBitmap = bundle.getParcelable("data");  
-            mPhotoView.setImageBitmap(mBitmap);  
-            saveBitmap(Environment.getExternalStorageDirectory() + "/crop_"  
-                    + System.currentTimeMillis() + ".png", mBitmap);  
-        }  
-    }  
-	
-    private Bitmap decodeUriAsBitmap(Uri uri) {
-        Bitmap bitmap = null;
-        try {
-            bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return bitmap;
-    }
-	private void doCrop() {
-
-		final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
-		Intent intent = new Intent("com.android.camera.action.CROP");
-		intent.setType("image/*");
-		List<ResolveInfo> list = getPackageManager().queryIntentActivities(
-				intent, 0);
-		int size = list.size();
-
-		if (size == 0) {
-			Toast.makeText(this, "can't find crop app", Toast.LENGTH_SHORT)
-					.show();
-			return;
-		} else {
-			intent.setData(mImgeUri);
-			intent.putExtra("outputX", 600);
-			intent.putExtra("outputY", 600);
-			intent.putExtra("aspectX", 1);
-			intent.putExtra("aspectY", 1);
-			intent.putExtra("scale", true);
-			
-			intent.putExtra("return-data", false);
-			intent.putExtra("output", mCropImageUri);
-
-			// only one
-			if (size == 1) {
-				Intent i = new Intent(intent);
-				ResolveInfo res = list.get(0);
-				i.setComponent(new ComponentName(res.activityInfo.packageName,
-						res.activityInfo.name));
-				startActivityForResult(i, CROP_FROM_CAMERA);
-			} else {
-				// many crop app
-				for (ResolveInfo res : list) {
-					final CropOption co = new CropOption();
-					co.title = getPackageManager().getApplicationLabel(
-							res.activityInfo.applicationInfo);
-					co.icon = getPackageManager().getApplicationIcon(
-							res.activityInfo.applicationInfo);
-					co.appIntent = new Intent(intent);
-					co.appIntent
-							.setComponent(new ComponentName(
-									res.activityInfo.packageName,
-									res.activityInfo.name));
-					cropOptions.add(co);
-				}
-
-				CropOptionAdapter adapter = new CropOptionAdapter(
-						getApplicationContext(), cropOptions);
-
-				AlertDialog.Builder builder = new AlertDialog.Builder(this);
-				builder.setTitle("choose a app");
-				builder.setAdapter(adapter,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int item) {
-								startActivityForResult(
-										cropOptions.get(item).appIntent,
-										CROP_FROM_CAMERA);
-							}
-						});
-
-				builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-					@Override
-					public void onCancel(DialogInterface dialog) {
-
-						if (mImgeUri != null) {
-							getContentResolver().delete(mImgeUri, null, null);
-							mImgeUri = null;
-						}
-					}
-				});
-
-				AlertDialog alert = builder.create();
-				alert.show();
-			}
-		}
+	/**
+	 * 进入登陆界面
+	 */
+	public void goLoginActivity() {
+		Intent intent = new Intent();
+		intent.setClass(this, LoginActivity.class);
+		startActivity(intent);
+		finish();
 	}
-	
-	private void doCrop2()
-	{
-
-
-		Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
-
-		intent.setDataAndType(mCropImageUri, "image/*");
-
-		intent.putExtra("crop", "true");
-
-		intent.putExtra("aspectX", 2);
-
-		intent.putExtra("aspectY", 1);
-
-		intent.putExtra("outputX", 600);
-
-		intent.putExtra("outputY", 300);
-
-		intent.putExtra("scale", true);
-
-		intent.putExtra("return-data", false);
-
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropImageUri);
-
-		intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-
-		intent.putExtra("noFaceDetection", true); // no face detection
-
-		startActivityForResult(intent, CROP_FROM_CAMERA);
-	}
-	
-	private void saveBitmap(String fileName, Bitmap mBitmap) {  
-        File f = new File(fileName);  
-        FileOutputStream fOut = null;  
-        try {  
-            f.createNewFile();  
-            fOut = new FileOutputStream(f);  
-            mBitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);  
-            fOut.flush();  
-        } catch (Exception e) {  
-            e.printStackTrace();  
-        } finally {  
-            try {  
-                fOut.close();  
-                Toast.makeText(this, "save success", Toast.LENGTH_SHORT).show();  
-            } catch (IOException e) {  
-                e.printStackTrace();  
-            }  
-        }  
-  
-    }  
-	
-
 	private Dialog mDialog = null;
 
 	private void showRequestDialog() {
@@ -424,11 +261,6 @@ public class RegisterActivity extends MyActivity implements OnClickListener {
 		}
 		mDialog = DialogFactory.creatRequestDialog(this, "正在注册中...");
 		mDialog.show();
-	}
-
-	@Override
-	public void onBackPressed() {// 捕获返回键
-		toast(RegisterActivity.this);
 	}
 
 	public void onClick(View v) {

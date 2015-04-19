@@ -13,7 +13,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.singlevillage.meet.activity.ChatActivity;
+import com.singlevillage.meet.activity.Mul2OneActivity;
 import com.singlevillage.meet.activity.R;
 import com.singlevillage.meet.activity.R.drawable;
 import com.singlevillage.meet.activity.R.id;
@@ -110,7 +110,7 @@ public class MyExAdapter extends BaseExpandableListAdapter {
 				u.setName(name);
 				u.setId(Integer.parseInt(id));
 				u.setImg(img);
-				Intent intent = new Intent(context, ChatActivity.class);
+				Intent intent = new Intent(context, Mul2OneActivity.class);
 				intent.putExtra("user", u);
 				context.startActivity(intent);
 				// Toast.makeText(Tab2.this, "开始聊天", 0).show();

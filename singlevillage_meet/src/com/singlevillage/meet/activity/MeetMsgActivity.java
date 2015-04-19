@@ -16,7 +16,7 @@ public class MeetMsgActivity extends MyActivity {
 	protected void onCreate(Bundle savedInstanceState)
 	{//TODO 从上一个activity中取得当前的状态来加载meet具体fragment
 		application = (MyApplication) this.getApplicationContext();
-		setContentView(R.layout.tab1);
+		setContentView(R.layout.activity_meet_msg);
 		mRecentListView = (ListView) findViewById(R.id.tab1_listView);
 		mRecentListView.setAdapter(application.getmRecentAdapter());// 先设置空对象，要么从数据库中读出
 		super.onCreate(savedInstanceState);

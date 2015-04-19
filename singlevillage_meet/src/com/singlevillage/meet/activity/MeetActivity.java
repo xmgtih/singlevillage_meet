@@ -7,22 +7,20 @@ import java.util.Date;
 
 import org.json.JSONObject;
 
-import android.app.FragmentTransaction;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.Request.Method;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.singlevillage.meet.common.tran.bean.TranObject;
-import com.singlevillage.meet.fragment.MeetStartFragment;
-import com.singlevillage.meet.fragment.MeetUnstartFragment;
 import com.singlevillage.meet.util.DialogFactory;
 import com.singlevillage.meet.util.HttpUtils;
 import com.singlevillage.meet.util.Utils;
@@ -50,15 +48,34 @@ public class MeetActivity extends MyActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.meet_layout);
 		initView();
-//		getMeetStatus();TODO  有网的时候打开
+//		getMeetStatus();TODO  待调试
 
 		
-		updateView(UNSTART);
+//		updateView(UNSTART);
 	}
 	
 	private void initView(){
 		mMsgTextView = (TextView)findViewById(R.id.msg);
+		mMsgTextView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MeetActivity.this, MeetMsgActivity.class);
+				startActivity(intent);
+				
+			}
+		});
 		mPersonalMsgTextView = (TextView)findViewById(R.id.personal_msg);
+		mPersonalMsgTextView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MeetActivity.this, MeetMsgActivity.class);
+				startActivity(intent);
+				
+			}
+		});		
+		
 		mUnStartContain = (RelativeLayout)findViewById(R.id.unStart_contain);
 		mStartContain = (RelativeLayout)findViewById(R.id.start_contain);
 		

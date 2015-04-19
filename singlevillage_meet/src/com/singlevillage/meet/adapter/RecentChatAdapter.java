@@ -13,13 +13,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.singlevillage.meet.activity.ChatActivity;
+import com.singlevillage.meet.activity.MsgActivity;
 import com.singlevillage.meet.activity.MyApplication;
 import com.singlevillage.meet.activity.R;
 import com.singlevillage.meet.activity.RecentChatEntity;
-import com.singlevillage.meet.activity.R.drawable;
-import com.singlevillage.meet.activity.R.id;
-import com.singlevillage.meet.activity.R.layout;
 import com.singlevillage.meet.common.bean.User;
 
 public class RecentChatAdapter extends BaseAdapter {
@@ -104,7 +101,7 @@ public class RecentChatAdapter extends BaseAdapter {
 				u.setName(entity.getName());
 				u.setId(entity.getId());
 				u.setImg(entity.getImg());
-				Intent intent = new Intent(context, ChatActivity.class);
+				Intent intent = new Intent(context, MsgActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.putExtra("user", u);
 				context.startActivity(intent);

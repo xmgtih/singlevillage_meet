@@ -205,7 +205,7 @@ public class FriendListActivity extends MyActivity implements OnClickListener {
 		//动态加载各个View
 		mListViews = new ArrayList<View>();
 		LayoutInflater inflater = LayoutInflater.from(this);
-		View lay1 = inflater.inflate(R.layout.tab1, null);
+		View lay1 = inflater.inflate(R.layout.activity_meet_msg, null);
 		View lay2 = inflater.inflate(R.layout.tab2, null);
 		View lay3 = inflater.inflate(R.layout.tab3, null);
 		mListViews.add(lay1);

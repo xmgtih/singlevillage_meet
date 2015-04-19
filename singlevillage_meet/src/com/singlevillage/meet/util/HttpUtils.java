@@ -10,6 +10,7 @@ public class HttpUtils {
 	public final static  String REGISTER = "http://120.24.227.131/api/user";
 	public final static  String VERIFY_PHONE = " http://120.24.227.131/api/invitation/";
 	public final static  String MEET_STATUS = "http://120.24.227.131/api/meet/status/";
+	public final static  String CHAT_SEND = "http://120.24.227.131/api/meet/msg";
 	private static RequestQueue sQueue = Volley.newRequestQueue(GlobalVar.getAppContext());
 	
 	public static void sendStringRequest(StringRequest stringRequest)

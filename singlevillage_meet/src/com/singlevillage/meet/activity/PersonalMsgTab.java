@@ -17,7 +17,7 @@ public class PersonalMsgTab extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		View tabView = inflater.inflate(R.layout.tab1, container, false);
+		View tabView = inflater.inflate(R.layout.activity_meet_msg, container, false);
 		mRecentListView = (ListView) tabView.findViewById(R.id.tab1_listView);
 		
 		application = (MyApplication)getActivity().getApplicationContext();

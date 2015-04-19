@@ -22,10 +22,6 @@
         <activity
             android:name="com.singlevillage.meet.activity.WelcomeActivity"
             android:theme="@android:style/Theme.NoTitleBar" >
-             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         
         <activity
@@ -56,7 +52,7 @@
         <activity android:name="com.singlevillage.meet.activity.Tab3" >
         </activity>
         <activity
-            android:name="com.singlevillage.meet.activity.ChatActivity"
+            android:name="com.singlevillage.meet.activity.Mul2OneActivity"
             android:windowSoftInputMode="adjustResize" >
 
         </activity>
@@ -74,6 +70,10 @@
         <activity
             android:name="com.singlevillage.meet.activity.MeetActivity"
             android:theme="@android:style/Theme.NoTitleBar">
+			<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.singlevillage.meet.activity.MeetMsgActivity"

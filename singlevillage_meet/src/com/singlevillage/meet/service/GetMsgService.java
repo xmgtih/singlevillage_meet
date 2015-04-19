@@ -1,5 +1,8 @@
 package com.singlevillage.meet.service;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,14 +11,21 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.singlevillage.meet.activity.ChatMsgEntity;
 import com.singlevillage.meet.activity.FriendListActivity;
+import com.singlevillage.meet.activity.Mul2OneActivity;
 import com.singlevillage.meet.activity.MyApplication;
 import com.singlevillage.meet.activity.R;
 import com.singlevillage.meet.activity.R.drawable;
@@ -30,9 +40,13 @@ import com.singlevillage.meet.common.bean.User;
 import com.singlevillage.meet.common.tran.bean.TranObject;
 import com.singlevillage.meet.common.tran.bean.TranObjectType;
 import com.singlevillage.meet.common.util.Constants;
+import com.singlevillage.meet.util.DialogFactory;
+import com.singlevillage.meet.util.ErrorCodeHelper;
+import com.singlevillage.meet.util.HttpUtils;
 import com.singlevillage.meet.util.MessageDB;
 import com.singlevillage.meet.util.MyDate;
 import com.singlevillage.meet.util.SharePreferenceUtil;
+import com.singlevillage.meet.util.Utils;
 
 /**
  * 收取消息服务
@@ -65,25 +79,34 @@ public class GetMsgService extends Service {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case MSG:
+			{
+				JSONObject response = (JSONObject)msg.obj;
+				JSONObject retData = response.optJSONObject("data");
+				JSONArray  msgList = retData.optJSONArray("msg_list");
 				int newMsgNum = application.getNewMsgNum();// 从全局变量中获取
-				newMsgNum++;// 每收到一次消息，自增一次
+				newMsgNum += msgList.length();//新信息个数
 				application.setNewMsgNum(newMsgNum);// 再设置为全局变量
-				TranObject<TextMessage> textObject = (TranObject<TextMessage>) msg
-						.getData().getSerializable("msg");
-				// System.out.println(textObject);
-				if (textObject != null) {
-					int form = textObject.getFromUser();// 消息从哪里来
-					String content = textObject.getObject().getMessage();// 消息内容
+				for(int i = 0;  i < msgList.length(); i++)
+				{
+					String userId = response.optString("user_id");
+					String name = response.optString("name");
+					String content = response.optString("msg");
+					String time = response.optString("time");
+					//图片Url待加入
+					ChatMsgEntity entity = new ChatMsgEntity();
+					entity.setName(name);
+					entity.setDate(time);
+					entity.setMessage(content);
+//					entity.setImg();TODO
+					entity.setMsgType(true);//来自对方
 
-					ChatMsgEntity entity = new ChatMsgEntity("",
-							MyDate.getDateEN(), content, -1, true);// 收到的消息
-					messageDB.saveMsg(form, entity);// 保存到数据库
-
+					messageDB.saveMsg(0, entity);//uerID 应该改为房间号 TODO
+				}
 					// 更新通知栏
 					int icon = R.drawable.notify_newmessage;
-					CharSequence tickerText = form + ":" + content;
+//					CharSequence tickerText = name + ":" + content;
 					long when = System.currentTimeMillis();
-					mNotification = new Notification(icon, tickerText, when);
+					mNotification = new Notification(icon, "", when);
 
 					mNotification.flags = Notification.FLAG_NO_CLEAR;
 					// 设置默认声音
@@ -97,10 +120,11 @@ public class GetMsgService extends Service {
 					PendingIntent contentIntent = PendingIntent.getActivity(
 							mContext, 0, intent, 0);
 					mNotification.setLatestEventInfo(mContext, util.getName()
-							+ " (" + newMsgNum + "条新消息)", content,
+							+ " (" + newMsgNum + "条新消息)", "",
 							contentIntent);
+					mNotificationManager.notify(Constants.NOTIFY_ID, mNotification);// 通知一下才会生效哦
+
 				}
-				mNotificationManager.notify(Constants.NOTIFY_ID, mNotification);// 通知一下才会生效哦
 				break;
 
 			default:
@@ -133,6 +157,8 @@ public class GetMsgService extends Service {
 		super.onStart(intent, startId);
 		util = new SharePreferenceUtil(getApplicationContext(),
 				Constants.SAVE_USER);
+		
+		
 		isStart = client.start();
 		application.setClientStart(isStart);
 		System.out.println("client start:" + isStart);
@@ -214,4 +240,51 @@ public class GetMsgService extends Service {
 		mNotification.contentIntent = contentIntent;
 		mNotificationManager.notify(Constants.NOTIFY_ID, mNotification);
 	}
+	private void getMsg(){
+		
+		JsonObjectRequest jsonRequest = new JsonObjectRequest(
+				Method.GET, HttpUtils.CHAT_SEND, null,
+				new Response.Listener<JSONObject>() {
+
+					@Override
+					public void onResponse(JSONObject response) {//TODO 解析并更新list
+						Log.i(Utils.TAG,response.toString());
+						int retCode = response.optInt("code");
+						if (ErrorCodeHelper.code.CODE_SUCCESS == retCode) {//ok
+							
+							
+							Message message = handler.obtainMessage();
+							message.what = MSG;
+							message.obj = response;
+							handler.sendMessage(message);
+						}
+
+					}
+
+				}, new Response.ErrorListener() {
+
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						
+					}
+				});
+		HttpUtils.sendJsonRequest(jsonRequest);
+	}
+	
+	/* 定义一个倒计时的内部类 */
+	class MyCount extends CountDownTimer {
+		public MyCount(long millisInFuture, long countDownInterval) {
+			super(millisInFuture, countDownInterval);
+		}
+
+		@Override
+		public void onFinish() {
+
+		}
+
+		@Override
+		public void onTick(long millisUntilFinished) {
+			getMsg();
+		}
+	} 
 }
